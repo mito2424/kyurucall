@@ -1,17 +1,627 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>きゅるかるホームページ</title>
+  <title>きゅるしてコールまとめ</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN",
+                   Arial, sans-serif;
+      color: #493746;
+      background: #fff8fc;
+      line-height: 1.8;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .site-header {
+      background: linear-gradient(135deg, #ffd7e9, #f4dfff);
+      padding: 32px 20px;
+      text-align: center;
+      border-bottom: 1px solid #f2c5dc;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #c64e88;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: #8b627b;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin: 4px 0 14px;
+    }
+
+    .intro {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 14px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .nav button {
+      border: 1px solid #e9a8c9;
+      background: white;
+      color: #bd4b83;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-weight: bold;
+    }
+
+    .nav button:hover {
+      background: #fff0f7;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+    }
+
+    .page-title {
+      text-align: center;
+      color: #bf4c83;
+      margin: 8px 0 4px;
+      font-size: 25px;
+    }
+
+    .page-description {
+      text-align: center;
+      color: #8d7181;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid #efc3da;
+      border-radius: 12px;
+      background: white;
+      outline-color: #d66b9e;
+      margin-bottom: 20px;
+    }
+
+    .song-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .song-card {
+      background: white;
+      border: 1px solid #f1d4e3;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 3px 12px rgba(180, 100, 145, 0.06);
+    }
+
+    .song-number {
+      color: #d36a9a;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .song-card h3 {
+      margin: 4px 0 8px;
+      color: #bd4b83;
+      font-size: 20px;
+    }
+
+    .song-card p {
+      font-size: 13px;
+      color: #8d7181;
+      margin: 0 0 14px;
+    }
+
+    .detail-button {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 16px;
+      background: #d8669c;
+      color: white;
+      font-weight: bold;
+    }
+
+    .detail-button:hover {
+      background: #bd4b83;
+    }
+
+    .back-button {
+      background: white;
+      color: #bd4b83;
+      border: 1px solid #e8b4ce;
+      border-radius: 999px;
+      padding: 8px 15px;
+      margin-bottom: 20px;
+    }
+
+    .detail-heading {
+      background: linear-gradient(135deg, #ffe1ee, #f3e4ff);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 22px;
+    }
+
+    .detail-heading h2 {
+      color: #bd4b83;
+      margin: 0 0 4px;
+      font-size: 27px;
+    }
+
+    .detail-heading p {
+      margin: 0;
+      font-size: 13px;
+      color: #8d627c;
+    }
+
+    .section {
+      background: white;
+      border: 1px solid #f1d4e3;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section h3 {
+      margin-top: 0;
+      color: #bd4b83;
+      font-size: 20px;
+      border-bottom: 2px solid #f8d9e8;
+      padding-bottom: 8px;
+    }
+
+    .lyrics {
+      white-space: pre-wrap;
+      background: #fffafd;
+      border-left: 4px solid #efb1cf;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    .call {
+      background: #fff0f7;
+      border: 1px solid #f5c4db;
+      border-radius: 10px;
+      padding: 12px 15px;
+      margin: 10px 0;
+      color: #a63870;
+      font-weight: bold;
+      white-space: pre-wrap;
+    }
+
+    .call-label {
+      font-size: 12px;
+      color: #c75b91;
+      margin-bottom: 3px;
+      font-weight: bold;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #f8e9f1;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .notice {
+      font-size: 12px;
+      color: #947687;
+      background: #fff8fc;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #92788a;
+      padding: 30px;
+      background: white;
+      border-radius: 14px;
+    }
+
+    .site-footer {
+      text-align: center;
+      background: #f8e3ef;
+      color: #977287;
+      padding: 25px 15px;
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 23px;
+      }
+
+      .song-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-heading h2 {
+        font-size: 23px;
+      }
+
+      .container {
+        padding-top: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <h1>きゅるかるのホームページ</h1>
+  <header class="site-header">
+    <h1 class="logo">🎀 きゅるしてコールまとめ</h1>
+    <div class="subtitle">KYURURIN TTE SHITEMITE</div>
 
-  <p>こんにちは！</p>
-  <p>ここは私のホームページです。</p>
+    <p class="intro">
+      きゅるりんってしてみてのライブをもっと楽しむための
+      コール・歌詞・参考動画まとめサイト♡
+    </p>
+
+    <nav class="nav">
+      <button onclick="showHome()">🏠 ホーム</button>
+      <button onclick="showAbout()">このサイトについて</button>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- ホーム画面 -->
+    <section id="home-page">
+      <h2 class="page-title">曲を探す ♡</h2>
+      <p class="page-description">
+        曲を選ぶと、歌詞・コール・参考動画を確認できます。
+      </p>
+
+      <input
+        id="search"
+        class="search-box"
+        type="search"
+        placeholder="🔍 曲名を検索…"
+        oninput="searchSongs()"
+      >
+
+      <div id="song-list" class="song-grid"></div>
+    </section>
+
+    <!-- 曲の詳細画面 -->
+    <section id="detail-page" class="hidden">
+      <button class="back-button" onclick="showHome()">
+        ← 曲一覧に戻る
+      </button>
+
+      <div id="song-detail"></div>
+    </section>
+
+    <!-- サイトについて -->
+    <section id="about-page" class="hidden">
+      <button class="back-button" onclick="showHome()">
+        ← ホームに戻る
+      </button>
+
+      <h2 class="page-title">このサイトについて</h2>
+
+      <div class="section">
+        <h3>♡ きゅるしてコールまとめ</h3>
+        <p>
+          このサイトは、きゅるりんってしてみてのライブを
+          より楽しむために、曲ごとの情報をまとめるファン向け
+          の試作サイトです。
+        </p>
+        <p>
+          コールには会場や公演によって違いがある場合があります。
+          ライブのルールを守って、無理なく楽しみましょう。
+        </p>
+        <div class="notice">
+          歌詞や動画を掲載する際は、著作権・利用規約・
+          権利者の許諾などを確認してください。
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    きゅるしてコールまとめ ♡<br>
+    Fan-made reference site
+  </footer>
+
+  <script>
+    /*
+      ==============================
+      曲データ
+      ==============================
+
+      新しい曲を追加するときは、
+      この配列にデータを追加してください。
+
+      youtubeIdには、YouTube動画URLの
+      ?v= の後ろにある動画IDを入れます。
+
+      例：
+      https://www.youtube.com/watch?v=ABC123
+      → youtubeId: "ABC123"
+    */
+
+    const songs = [
+      {
+        id: 1,
+        title: "推忍っ",
+        description: "コール・MIX・メンバーコールまとめ",
+        lyrics: `ここに掲載許諾を得た歌詞や、
+歌詞の要約・参照メモを入力してください。`,
+        calls: [
+          {
+            label: "イントロ",
+            text: "ここにイントロのコールを入力"
+          },
+          {
+            label: "メンバーコール",
+            text: "ここにメンバーコールを入力"
+          },
+          {
+            label: "間奏",
+            text: "ここに間奏のコールを入力"
+          }
+        ],
+        youtubeId: "",
+        videoNote: "参考動画のYouTube IDを設定してください。"
+      },
+      {
+        id: 2,
+        title: "アイドルライブコースター！",
+        description: "曲中コール・MIX・掛け声まとめ",
+        lyrics: `ここに掲載許諾を得た歌詞や、
+歌詞の要約・参照メモを入力してください。`,
+        calls: [
+          {
+            label: "イントロ",
+            text: "ここにイントロのコールを入力"
+          },
+          {
+            label: "サビ",
+            text: "ここにサビのコールを入力"
+          },
+          {
+            label: "間奏",
+            text: "ここに間奏のコールを入力"
+          }
+        ],
+        youtubeId: "",
+        videoNote: "参考動画のYouTube IDを設定してください。"
+      },
+      {
+        id: 3,
+        title: "らぶきゅん♡うぉんてっど",
+        description: "コール・MIX・掛け声まとめ",
+        lyrics: `ここに掲載許諾を得た歌詞や、
+歌詞の要約・参照メモを入力してください。`,
+        calls: [
+          {
+            label: "イントロ",
+            text: "ここにイントロのコールを入力"
+          },
+          {
+            label: "曲中コール",
+            text: "ここに曲中のコールを入力"
+          },
+          {
+            label: "アウトロ",
+            text: "ここにアウトロのコールを入力"
+          }
+        ],
+        youtubeId: "",
+        videoNote: "参考動画のYouTube IDを設定してください。"
+      }
+    ];
+
+    const homePage = document.getElementById("home-page");
+    const detailPage = document.getElementById("detail-page");
+    const aboutPage = document.getElementById("about-page");
+    const songList = document.getElementById("song-list");
+    const songDetail = document.getElementById("song-detail");
+    const searchInput = document.getElementById("search");
+
+    // 曲一覧を表示
+    function renderSongs(list = songs) {
+      songList.innerHTML = "";
+
+      if (list.length === 0) {
+        songList.innerHTML = `
+          <div class="empty">
+            該当する曲が見つかりませんでした。
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(song => {
+        const card = document.createElement("article");
+        card.className = "song-card";
+
+        card.innerHTML = `
+          <div class="song-number">
+            SONG ${String(song.id).padStart(2, "0")}
+          </div>
+          <h3>${escapeHTML(song.title)}</h3>
+          <p>${escapeHTML(song.description)}</p>
+          <button class="detail-button">
+            詳細を見る ♡
+          </button>
+        `;
+
+        card.querySelector("button").addEventListener("click", () => {
+          showSong(song.id);
+        });
+
+        songList.appendChild(card);
+      });
+    }
+
+    // 曲を検索
+    function searchSongs() {
+      const keyword = searchInput.value.trim().toLowerCase();
+
+      const filtered = songs.filter(song =>
+        song.title.toLowerCase().includes(keyword)
+      );
+
+      renderSongs(filtered);
+    }
+
+    // ホームを表示
+    function showHome() {
+      homePage.classList.remove("hidden");
+      detailPage.classList.add("hidden");
+      aboutPage.classList.add("hidden");
+
+      window.scrollTo(0, 0);
+    }
+
+    // このサイトについてを表示
+    function showAbout() {
+      homePage.classList.add("hidden");
+      detailPage.classList.add("hidden");
+      aboutPage.classList.remove("hidden");
+
+      window.scrollTo(0, 0);
+    }
+
+    // 曲の詳細を表示
+    function showSong(id) {
+      const song = songs.find(item => item.id === id);
+
+      if (!song) return;
+
+      homePage.classList.add("hidden");
+      aboutPage.classList.add("hidden");
+      detailPage.classList.remove("hidden");
+
+      let callsHTML = "";
+
+      song.calls.forEach(call => {
+        callsHTML += `
+          <div class="call">
+            <div class="call-label">
+              📣 ${escapeHTML(call.label)}
+            </div>
+            ${escapeHTML(call.text)}
+          </div>
+        `;
+      });
+
+      let videoHTML = "";
+
+      if (song.youtubeId.trim() !== "") {
+        videoHTML = `
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/${encodeURIComponent(song.youtubeId)}"
+              title="${escapeHTML(song.title)} 参考動画"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+        `;
+      } else {
+        videoHTML = `
+          <div class="notice">
+            まだ参考動画が設定されていません。<br>
+            曲データの youtubeId に動画IDを入力すると、
+            ここにYouTube動画が表示されます。
+          </div>
+        `;
+      }
+
+      songDetail.innerHTML = `
+        <div class="detail-heading">
+          <h2>${escapeHTML(song.title)} ♡</h2>
+          <p>${escapeHTML(song.description)}</p>
+        </div>
+
+        <div class="section">
+          <h3>🎤 歌詞・歌詞メモ</h3>
+          <div class="lyrics">
+            ${escapeHTML(song.lyrics)}
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>📣 コールまとめ</h3>
+          ${callsHTML}
+        </div>
+
+        <div class="section">
+          <h3>▶ 参考動画</h3>
+          ${videoHTML}
+          <p class="notice">
+            ${escapeHTML(song.videoNote)}
+          </p>
+        </div>
+      `;
+
+      window.scrollTo(0, 0);
+    }
+
+    // HTMLとして解釈されないように文字を処理
+    function escapeHTML(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    // 最初に曲一覧を表示
+    renderSongs();
+  </script>
 
 </body>
 </html>
