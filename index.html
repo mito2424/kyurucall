@@ -20,12 +20,7 @@
       line-height: 1.8;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button, input, textarea {
+    button, input {
       font: inherit;
     }
 
@@ -41,15 +36,14 @@
     }
 
     .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: #c64e88;
       margin: 0;
+      font-size: 28px;
+      color: #c64e88;
     }
 
     .subtitle {
       color: #8b627b;
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 2px;
       margin: 4px 0 14px;
     }
@@ -63,12 +57,13 @@
     .nav {
       display: flex;
       justify-content: center;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
       margin-top: 20px;
     }
 
-    .nav button {
+    .nav button,
+    .back-button {
       border: 1px solid #e9a8c9;
       background: white;
       color: #bd4b83;
@@ -77,21 +72,17 @@
       font-weight: bold;
     }
 
-    .nav button:hover {
-      background: #fff0f7;
-    }
-
     .container {
-      max-width: 920px;
+      max-width: 1050px;
       margin: 0 auto;
-      padding: 28px 16px 60px;
+      padding: 30px 16px 60px;
     }
 
     .page-title {
       text-align: center;
       color: #bf4c83;
+      font-size: 27px;
       margin: 8px 0 4px;
-      font-size: 25px;
     }
 
     .page-description {
@@ -102,6 +93,7 @@
     }
 
     .search-box {
+      display: block;
       width: 100%;
       padding: 13px 16px;
       border: 1px solid #efc3da;
@@ -157,25 +149,20 @@
     }
 
     .back-button {
-      background: white;
-      color: #bd4b83;
-      border: 1px solid #e8b4ce;
-      border-radius: 999px;
-      padding: 8px 15px;
       margin-bottom: 20px;
     }
 
     .detail-heading {
       background: linear-gradient(135deg, #ffe1ee, #f3e4ff);
       border-radius: 18px;
-      padding: 24px;
+      padding: 25px;
       margin-bottom: 22px;
     }
 
     .detail-heading h2 {
       color: #bd4b83;
       margin: 0 0 4px;
-      font-size: 27px;
+      font-size: 28px;
     }
 
     .detail-heading p {
@@ -200,31 +187,111 @@
       padding-bottom: 8px;
     }
 
-    .lyrics {
+    /*
+      歌詞とコールを左右に並べる部分
+    */
+
+    .lyrics-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid #efd8e4;
+      border-radius: 12px;
+      overflow: hidden;
+      table-layout: fixed;
+    }
+
+    .lyrics-table th {
+      background: #fbe5f0;
+      color: #a63d70;
+      padding: 13px;
+      text-align: left;
+      font-size: 14px;
+      width: 50%;
+    }
+
+    .lyrics-table td {
+      padding: 14px;
+      vertical-align: top;
+      border-top: 1px solid #f1e0e8;
+      border-right: 1px solid #f1e0e8;
       white-space: pre-wrap;
-      background: #fffafd;
-      border-left: 4px solid #efb1cf;
-      border-radius: 8px;
-      padding: 15px;
+      overflow-wrap: anywhere;
       font-size: 14px;
     }
 
-    .call {
-      background: #fff0f7;
-      border: 1px solid #f5c4db;
-      border-radius: 10px;
-      padding: 12px 15px;
-      margin: 10px 0;
-      color: #a63870;
-      font-weight: bold;
-      white-space: pre-wrap;
+    .lyrics-table td:last-child,
+    .lyrics-table th:last-child {
+      border-right: none;
     }
 
-    .call-label {
-      font-size: 12px;
-      color: #c75b91;
-      margin-bottom: 3px;
+    .lyrics-table tr:nth-child(even) td {
+      background: #fffafd;
+    }
+
+    .lyrics-table .call-cell {
+      color: #b13e76;
       font-weight: bold;
+    }
+
+    .lyrics-table .no-call {
+      color: #aa98a3;
+      font-weight: normal;
+    }
+
+    .lyrics-table .part-name {
+      display: inline-block;
+      color: #c65b91;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      background: #fff0f7;
+      border-radius: 5px;
+      padding: 1px 6px;
+    }
+
+    .lyrics-table .call-cell.has-call {
+      background: #fff0f7 !important;
+    }
+
+    .lyrics-table .call-cell.has-call::before {
+      content: "📣 ";
+    }
+
+    .note-box {
+      background: #fff5fa;
+      border-left: 4px solid #e9a2c4;
+      border-radius: 8px;
+      padding: 13px 15px;
+      margin: 10px 0;
+      font-size: 14px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .call-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .call-item {
+      border: 1px solid #f4ccdf;
+      border-radius: 10px;
+      padding: 12px 15px;
+      background: #fff7fb;
+    }
+
+    .call-item h4 {
+      color: #bd4b83;
+      font-size: 14px;
+      margin: 0 0 4px;
+    }
+
+    .call-item p {
+      margin: 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: 14px;
     }
 
     .video-wrapper {
@@ -251,6 +318,7 @@
       padding: 12px;
       border-radius: 8px;
       margin-top: 12px;
+      overflow-wrap: anywhere;
     }
 
     .empty {
@@ -273,7 +341,7 @@
       display: none !important;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       .logo {
         font-size: 23px;
       }
@@ -284,6 +352,16 @@
 
       .detail-heading h2 {
         font-size: 23px;
+      }
+
+      .lyrics-table th,
+      .lyrics-table td {
+        padding: 10px 8px;
+        font-size: 12px;
+      }
+
+      .lyrics-table th {
+        font-size: 12px;
       }
 
       .container {
@@ -297,7 +375,7 @@
 
   <header class="site-header">
     <h1 class="logo">🎀 きゅるしてコールまとめ</h1>
-    <div class="subtitle">KYURURIN TTE SHITEMITE</div>
+    <div class="subtitle">KYURURIN TE SHITEMITE</div>
 
     <p class="intro">
       きゅるりんってしてみてのライブをもっと楽しむための
@@ -315,8 +393,9 @@
     <!-- ホーム画面 -->
     <section id="home-page">
       <h2 class="page-title">曲を探す ♡</h2>
+
       <p class="page-description">
-        曲を選ぶと、歌詞・コール・参考動画を確認できます。
+        曲を選ぶと、歌詞とコールを見比べられます。
       </p>
 
       <input
@@ -330,7 +409,7 @@
       <div id="song-list" class="song-grid"></div>
     </section>
 
-    <!-- 曲の詳細画面 -->
+    <!-- 曲別ページ -->
     <section id="detail-page" class="hidden">
       <button class="back-button" onclick="showHome()">
         ← 曲一覧に戻る
@@ -349,15 +428,18 @@
 
       <div class="section">
         <h3>♡ きゅるしてコールまとめ</h3>
+
         <p>
           このサイトは、きゅるりんってしてみてのライブを
-          より楽しむために、曲ごとの情報をまとめるファン向け
-          の試作サイトです。
+          より楽しむために、曲ごとの情報を整理する
+          ファン向けのまとめサイトです。
         </p>
+
         <p>
-          コールには会場や公演によって違いがある場合があります。
+          コールは公演や会場によって異なる場合があります。
           ライブのルールを守って、無理なく楽しみましょう。
         </p>
+
         <div class="notice">
           歌詞や動画を掲載する際は、著作権・利用規約・
           権利者の許諾などを確認してください。
@@ -374,60 +456,93 @@
 
   <script>
     /*
-      ==============================
+      ==========================================
       曲データ
-      ==============================
+      ==========================================
 
-      新しい曲を追加するときは、
-      この配列にデータを追加してください。
+      ここを編集すると、曲の情報を変更できます。
 
-      youtubeIdには、YouTube動画URLの
-      ?v= の後ろにある動画IDを入れます。
+      lyricsCalls：
+      歌詞とコールを1行ずつ対応させる配列です。
 
-      例：
-      https://www.youtube.com/watch?v=ABC123
-      → youtubeId: "ABC123"
+      lyrics：
+      歌詞の行。掲載許諾を得た歌詞や、
+      歌詞の要約・参照メモを入力してください。
+
+      call：
+      その行に対応するコール。
+      コールがない場合は "" にします。
+
+      part：
+      イントロ・Aメロ・サビなどの区分。
+
+      youtubeId：
+      YouTube URLの ?v= の後ろの動画IDです。
     */
 
     const songs = [
       {
         id: 1,
         title: "推忍っ",
-        description: "コール・MIX・メンバーコールまとめ",
-        lyrics: `ここに掲載許諾を得た歌詞や、
-歌詞の要約・参照メモを入力してください。`,
-        calls: [
+        description: "歌詞とコールを見比べるページ",
+        lyricsCalls: [
           {
-            label: "イントロ",
-            text: "ここにイントロのコールを入力"
+            part: "イントロ",
+            lyrics: "歌詞の掲載許諾を得た内容を入力",
+            call: "ここにイントロのコールを入力"
+          },
+          {
+            part: "Aメロ",
+            lyrics: "歌詞の2行目を入力",
+            call: ""
+          },
+          {
+            part: "Bメロ",
+            lyrics: "歌詞の3行目を入力",
+            call: "ここに掛け声を入力"
+          },
+          {
+            part: "サビ",
+            lyrics: "歌詞の4行目を入力",
+            call: "ここにサビのコールを入力"
+          }
+        ],
+        extraCalls: [
+          {
+            label: "MIX",
+            text: "ここにMIXの情報を入力"
           },
           {
             label: "メンバーコール",
             text: "ここにメンバーコールを入力"
-          },
-          {
-            label: "間奏",
-            text: "ここに間奏のコールを入力"
           }
         ],
         youtubeId: "",
         videoNote: "参考動画のYouTube IDを設定してください。"
       },
+
       {
         id: 2,
         title: "アイドルライブコースター！",
-        description: "曲中コール・MIX・掛け声まとめ",
-        lyrics: `ここに掲載許諾を得た歌詞や、
-歌詞の要約・参照メモを入力してください。`,
-        calls: [
+        description: "歌詞とコールを見比べるページ",
+        lyricsCalls: [
           {
-            label: "イントロ",
-            text: "ここにイントロのコールを入力"
+            part: "イントロ",
+            lyrics: "歌詞の掲載許諾を得た内容を入力",
+            call: "ここにイントロのコールを入力"
           },
           {
-            label: "サビ",
-            text: "ここにサビのコールを入力"
+            part: "Aメロ",
+            lyrics: "歌詞の2行目を入力",
+            call: ""
           },
+          {
+            part: "サビ",
+            lyrics: "歌詞の3行目を入力",
+            call: "ここにサビのコールを入力"
+          }
+        ],
+        extraCalls: [
           {
             label: "間奏",
             text: "ここに間奏のコールを入力"
@@ -436,21 +551,29 @@
         youtubeId: "",
         videoNote: "参考動画のYouTube IDを設定してください。"
       },
+
       {
         id: 3,
         title: "らぶきゅん♡うぉんてっど",
-        description: "コール・MIX・掛け声まとめ",
-        lyrics: `ここに掲載許諾を得た歌詞や、
-歌詞の要約・参照メモを入力してください。`,
-        calls: [
+        description: "歌詞とコールを見比べるページ",
+        lyricsCalls: [
           {
-            label: "イントロ",
-            text: "ここにイントロのコールを入力"
+            part: "イントロ",
+            lyrics: "歌詞の掲載許諾を得た内容を入力",
+            call: "ここにイントロのコールを入力"
           },
           {
-            label: "曲中コール",
-            text: "ここに曲中のコールを入力"
+            part: "Aメロ",
+            lyrics: "歌詞の2行目を入力",
+            call: ""
           },
+          {
+            part: "サビ",
+            lyrics: "歌詞の3行目を入力",
+            call: "ここにサビのコールを入力"
+          }
+        ],
+        extraCalls: [
           {
             label: "アウトロ",
             text: "ここにアウトロのコールを入力"
@@ -467,6 +590,16 @@
     const songList = document.getElementById("song-list");
     const songDetail = document.getElementById("song-detail");
     const searchInput = document.getElementById("search");
+
+    // HTMLに安全に表示するための処理
+    function escapeHTML(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
 
     // 曲一覧を表示
     function renderSongs(list = songs) {
@@ -489,10 +622,13 @@
           <div class="song-number">
             SONG ${String(song.id).padStart(2, "0")}
           </div>
+
           <h3>${escapeHTML(song.title)}</h3>
+
           <p>${escapeHTML(song.description)}</p>
+
           <button class="detail-button">
-            詳細を見る ♡
+            歌詞・コールを見る ♡
           </button>
         `;
 
@@ -515,7 +651,7 @@
       renderSongs(filtered);
     }
 
-    // ホームを表示
+    // ホーム画面を表示
     function showHome() {
       homePage.classList.remove("hidden");
       detailPage.classList.add("hidden");
@@ -524,7 +660,7 @@
       window.scrollTo(0, 0);
     }
 
-    // このサイトについてを表示
+    // サイトについてを表示
     function showAbout() {
       homePage.classList.add("hidden");
       detailPage.classList.add("hidden");
@@ -533,7 +669,7 @@
       window.scrollTo(0, 0);
     }
 
-    // 曲の詳細を表示
+    // 曲別ページを表示
     function showSong(id) {
       const song = songs.find(item => item.id === id);
 
@@ -543,19 +679,53 @@
       aboutPage.classList.add("hidden");
       detailPage.classList.remove("hidden");
 
-      let callsHTML = "";
+      // 歌詞・コールの表を作る
+      let rowsHTML = "";
 
-      song.calls.forEach(call => {
-        callsHTML += `
-          <div class="call">
-            <div class="call-label">
-              📣 ${escapeHTML(call.label)}
-            </div>
-            ${escapeHTML(call.text)}
-          </div>
+      song.lyricsCalls.forEach(item => {
+        const hasCall = item.call.trim() !== "";
+
+        rowsHTML += `
+          <tr>
+            <td>
+              <span class="part-name">
+                ${escapeHTML(item.part)}
+              </span><br>
+              ${escapeHTML(item.lyrics)}
+            </td>
+
+            <td class="call-cell ${hasCall ? "has-call" : "no-call"}">
+              ${
+                hasCall
+                  ? escapeHTML(item.call)
+                  : "コールなし"
+              }
+            </td>
+          </tr>
         `;
       });
 
+      // その他のコール情報
+      let extraCallsHTML = "";
+
+      if (song.extraCalls && song.extraCalls.length > 0) {
+        song.extraCalls.forEach(item => {
+          extraCallsHTML += `
+            <div class="call-item">
+              <h4>📣 ${escapeHTML(item.label)}</h4>
+              <p>${escapeHTML(item.text)}</p>
+            </div>
+          `;
+        });
+      } else {
+        extraCallsHTML = `
+          <div class="notice">
+            追加のコール情報はまだありません。
+          </div>
+        `;
+      }
+
+      // YouTube動画
       let videoHTML = "";
 
       if (song.youtubeId.trim() !== "") {
@@ -565,6 +735,10 @@
               src="https://www.youtube.com/embed/${encodeURIComponent(song.youtubeId)}"
               title="${escapeHTML(song.title)} 参考動画"
               loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write;
+                     encrypted-media; gyroscope; picture-in-picture;
+                     web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen>
             </iframe>
           </div>
@@ -586,20 +760,41 @@
         </div>
 
         <div class="section">
-          <h3>🎤 歌詞・歌詞メモ</h3>
-          <div class="lyrics">
-            ${escapeHTML(song.lyrics)}
+          <h3>🎤 歌詞とコール</h3>
+
+          <p class="notice">
+            左側の歌詞と右側のコールを、
+            同じ行で見比べることができます。
+          </p>
+
+          <div style="overflow-x:auto;">
+            <table class="lyrics-table">
+              <thead>
+                <tr>
+                  <th>歌詞</th>
+                  <th>コール・掛け声</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${rowsHTML}
+              </tbody>
+            </table>
           </div>
         </div>
 
         <div class="section">
-          <h3>📣 コールまとめ</h3>
-          ${callsHTML}
+          <h3>📣 その他のコール情報</h3>
+          <div class="call-list">
+            ${extraCallsHTML}
+          </div>
         </div>
 
         <div class="section">
           <h3>▶ 参考動画</h3>
+
           ${videoHTML}
+
           <p class="notice">
             ${escapeHTML(song.videoNote)}
           </p>
@@ -607,16 +802,6 @@
       `;
 
       window.scrollTo(0, 0);
-    }
-
-    // HTMLとして解釈されないように文字を処理
-    function escapeHTML(text) {
-      return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
     }
 
     // 最初に曲一覧を表示
