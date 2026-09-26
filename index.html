@@ -585,7 +585,7 @@
   <header class="site-header">
 
     <h1 class="logo">
-      きゅるしてコールまとめ♡429
+      きゅるしてコールまとめ♡434
     </h1>
 
     <div class="subtitle">
@@ -1426,14 +1426,7 @@ Are You Ready?
       window.scrollTo(0, 0);
     }
 
-    // 初期表示
-    showHome();
-  </script>
-</body>
-</html>
-
-
-    <script>
+    
     /* ========================================== YouTube ID抽出関数 ========================================== */
     function extractYouTubeId(urlOrId) {
       if (!urlOrId) return "";
@@ -1499,20 +1492,13 @@ Are You Ready?
         : `<p>まだ参考動画が設定されていません。</p>`;
 
       let rowsHTML = "";
-      if (song.songLyricsCalls && song.songLyricsCalls.length > 0) {
-        rowsHTML = song.songLyricsCalls.map(block => `
+      if (song.lyricsCalls && song.lyricsCalls.length > 0) {
+        rowsHTML = song.lyricsCalls.map(block => `
           <div class="table-row">
             <div class="lyrics-td">${escapeHTML(block.lyrics || "")}</div>
             <div class="call-td">${escapeHTML(block.call || "")}</div>
           </div>
         `).join("");
-      } else {
-        rowsHTML = `
-          <div class="table-row">
-            <div class="lyrics-td">${escapeHTML(song.lyrics || "")}</div>
-            <div class="call-td">${escapeHTML(song.calls || "")}</div>
-          </div>
-        `;
       }
 
       document.getElementById("song-detail").innerHTML = `
