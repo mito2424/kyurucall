@@ -414,6 +414,104 @@
       display: none !important;
     }
 
+    /* =========================================
+   曲別ページ：歌詞・コールの縦長ボックス
+   ========================================= */
+
+.lyrics-call-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 15px;
+}
+
+.lyrics-column,
+.call-column {
+  border: 1px solid #f0d4e2;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+}
+
+.lyrics-column-title,
+.call-column-title {
+  padding: 13px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.lyrics-column-title {
+  background: #f8e6f0;
+  color: #bd4b83;
+}
+
+.call-column-title {
+  background: #f3e8fb;
+  color: #9555a8;
+}
+
+.lyrics-content,
+.call-content {
+  padding: 18px;
+}
+
+.lyrics-line,
+.call-line {
+  padding: 14px 8px;
+  min-height: 50px;
+  border-bottom: 1px solid #f1e1e9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.lyrics-line:last-child,
+.call-line:last-child {
+  border-bottom: none;
+}
+
+.call-line {
+  color: #b13e76;
+  font-weight: bold;
+  background: #fff8fc;
+}
+
+.call-line.no-call {
+  color: #aa98a3;
+  font-weight: normal;
+  background: white;
+}
+
+
+/* スマホ */
+@media (max-width: 650px) {
+
+  .lyrics-call-box {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .lyrics-column-title,
+  .call-column-title {
+    padding: 10px 5px;
+    font-size: 12px;
+  }
+
+  .lyrics-content,
+  .call-content {
+    padding: 8px;
+  }
+
+  .lyrics-line,
+  .call-line {
+    padding: 11px 5px;
+    font-size: 11px;
+  }
+
+}
+
     @media (max-width: 650px) {
 
   .song-grid {
@@ -776,139 +874,192 @@
     }
 
     // 曲別ページを表示
-    function showSong(id) {
-      const song = songs.find(item => item.id === id);
+    // 曲別ページを表示
+function showSong(id) {
+  const song = songs.find(item => item.id === id);
 
-      if (!song) return;
+  if (!song) return;
 
-      homePage.classList.add("hidden");
-      aboutPage.classList.add("hidden");
-      detailPage.classList.remove("hidden");
+  homePage.classList.add("hidden");
+  aboutPage.classList.add("hidden");
+  detailPage.classList.remove("hidden");
 
-      // 歌詞・コールの表を作る
-      let rowsHTML = "";
+  /*
+    ==========================================
+    歌詞を表示
+    ==========================================
 
-      song.lyricsCalls.forEach(item => {
-        const hasCall = item.call.trim() !== "";
+    「イントロ」「Aメロ」などのpartは
+    表示せず、歌詞だけを縦に並べます。
+  */
 
-        rowsHTML += `
-          <tr>
-            <td>
-              <span class="part-name">
-                ${escapeHTML(item.part)}
-              </span><br>
-              ${escapeHTML(item.lyrics)}
-            </td>
+  let lyricsHTML = "";
 
-            <td class="call-cell ${hasCall ? "has-call" : "no-call"}">
-              ${
-                hasCall
-                  ? escapeHTML(item.call)
-                  : "コールなし"
-              }
-            </td>
-          </tr>
-        `;
-      });
+  song.lyricsCalls.forEach(item => {
+    lyricsHTML += `
+      <div class="lyrics-line">
+        ${escapeHTML(item.lyrics)}
+      </div>
+    `;
+  });
 
-      // その他のコール情報
-      let extraCallsHTML = "";
 
-      if (song.extraCalls && song.extraCalls.length > 0) {
-        song.extraCalls.forEach(item => {
-          extraCallsHTML += `
-            <div class="call-item">
-              <h4>📣 ${escapeHTML(item.label)}</h4>
-              <p>${escapeHTML(item.text)}</p>
-            </div>
-          `;
-        });
-      } else {
-        extraCallsHTML = `
-          <div class="notice">
-            追加のコール情報はまだありません。
+  /*
+    ==========================================
+    コールを表示
+    ==========================================
+
+    歌詞と同じ順番でコールを縦に並べます。
+
+    コールがない場合は
+    「コールなし」と表示します。
+  */
+
+  let callsHTML = "";
+
+  song.lyricsCalls.forEach(item => {
+
+    const hasCall =
+      item.call &&
+      item.call.trim() !== "";
+
+    callsHTML += `
+      <div class="call-line ${hasCall ? "" : "no-call"}">
+        ${
+          hasCall
+            ? "📣 " + escapeHTML(item.call)
+            : "コールなし"
+        }
+      </div>
+    `;
+  });
+
+
+  /*
+    ==========================================
+    YouTube動画
+    ==========================================
+  */
+
+  let videoHTML = "";
+
+  if (
+    song.youtubeId &&
+    song.youtubeId.trim() !== ""
+  ) {
+
+    videoHTML = `
+      <div class="video-wrapper">
+
+        <iframe
+          src="https://www.youtube.com/embed/${encodeURIComponent(song.youtubeId)}"
+          title="${escapeHTML(song.title)} 参考動画"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write;
+                 encrypted-media; gyroscope; picture-in-picture;
+                 web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+
+      </div>
+    `;
+
+  } else {
+
+    videoHTML = `
+      <div class="notice">
+        まだ参考動画が設定されていません。
+      </div>
+    `;
+  }
+
+
+  /*
+    ==========================================
+    曲別ページ本体
+    ==========================================
+  */
+
+  songDetail.innerHTML = `
+
+    <!-- 曲タイトル -->
+
+    <div class="detail-heading">
+
+      <h2>
+        ${escapeHTML(song.title)} ♡
+      </h2>
+
+    </div>
+
+
+    <!-- 歌詞・コール -->
+
+    <div class="section">
+
+      <h3>🎤 歌詞・コール</h3>
+
+      <div class="lyrics-call-box">
+
+        <!-- 歌詞 -->
+
+        <div class="lyrics-column">
+
+          <div class="lyrics-column-title">
+            歌詞
           </div>
-        `;
+
+          <div class="lyrics-content">
+            ${lyricsHTML}
+          </div>
+
+        </div>
+
+
+        <!-- コール -->
+
+        <div class="call-column">
+
+          <div class="call-column-title">
+            📣 コール・掛け声
+          </div>
+
+          <div class="call-content">
+            ${callsHTML}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 参考動画 -->
+
+    <div class="section">
+
+      <h3>▶ 参考動画</h3>
+
+      ${videoHTML}
+
+      ${
+        song.videoNote
+          ? `
+            <p class="notice">
+              ${escapeHTML(song.videoNote)}
+            </p>
+          `
+          : ""
       }
 
-      // YouTube動画
-      let videoHTML = "";
+    </div>
 
-      if (song.youtubeId.trim() !== "") {
-        videoHTML = `
-          <div class="video-wrapper">
-            <iframe
-              src="https://www.youtube.com/embed/${encodeURIComponent(song.youtubeId)}"
-              title="${escapeHTML(song.title)} 参考動画"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write;
-                     encrypted-media; gyroscope; picture-in-picture;
-                     web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen>
-            </iframe>
-          </div>
-        `;
-      } else {
-        videoHTML = `
-          <div class="notice">
-            まだ参考動画が設定されていません。<br>
-            曲データの youtubeId に動画IDを入力すると、
-            ここにYouTube動画が表示されます。
-          </div>
-        `;
-      }
+  `;
 
-      songDetail.innerHTML = `
-        <div class="detail-heading">
-          <h2>${escapeHTML(song.title)} ♡</h2>
-          <p>${escapeHTML(song.description)}</p>
-        </div>
-
-        <div class="section">
-          <h3>🎤 歌詞とコール</h3>
-
-          <p class="notice">
-            左側の歌詞と右側のコールを、
-            同じ行で見比べることができます。
-          </p>
-
-          <div style="overflow-x:auto;">
-            <table class="lyrics-table">
-              <thead>
-                <tr>
-                  <th>歌詞</th>
-                  <th>コール・掛け声</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${rowsHTML}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>📣 その他のコール情報</h3>
-          <div class="call-list">
-            ${extraCallsHTML}
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>▶ 参考動画</h3>
-
-          ${videoHTML}
-
-          <p class="notice">
-            ${escapeHTML(song.videoNote)}
-          </p>
-        </div>
-      `;
-
-      window.scrollTo(0, 0);
-    }
+  window.scrollTo(0, 0);
+}
 
     // 最初に曲一覧を表示
     renderSongs();
