@@ -453,23 +453,24 @@
 
 .lyrics-content,
 .call-content {
-  padding: 18px;
+  padding: 20px;
 }
 
 .lyrics-line,
 .call-line {
-  padding: 14px 8px;
-  min-height: 50px;
-  border-bottom: 1px solid #f1e1e9;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   font-size: 14px;
-  line-height: 1.8;
+  line-height: 2;
 }
 
-.lyrics-line:last-child,
-.call-line:last-child {
-  border-bottom: none;
+.lyrics-line {
+  color: #4b3946;
+}
+
+.call-line {
+  color: #b13e76;
+  font-weight: bold;
 }
 
 .call-line {
@@ -895,13 +896,13 @@ function showSong(id) {
 
   let lyricsHTML = "";
 
-  song.lyricsCalls.forEach(item => {
-    lyricsHTML += `
-      <div class="lyrics-line">
-        ${escapeHTML(item.lyrics)}
-      </div>
-    `;
-  });
+song.lyricsCalls.forEach(item => {
+  lyricsHTML += `
+    <div class="lyrics-line">
+      ${escapeHTML(item.lyrics)}
+    </div>
+  `;
+});
 
 
   /*
@@ -917,22 +918,22 @@ function showSong(id) {
 
   let callsHTML = "";
 
-  song.lyricsCalls.forEach(item => {
+song.lyricsCalls.forEach(item => {
 
-    const hasCall =
-      item.call &&
-      item.call.trim() !== "";
+  const hasCall =
+    item.call &&
+    item.call.trim() !== "";
 
-    callsHTML += `
-      <div class="call-line ${hasCall ? "" : "no-call"}">
-        ${
-          hasCall
-            ? "📣 " + escapeHTML(item.call)
-            : "コールなし"
-        }
-      </div>
-    `;
-  });
+  callsHTML += `
+    <div class="call-line ${hasCall ? "" : "no-call"}">
+      ${
+        hasCall
+          ? "📣 " + escapeHTML(item.call)
+          : "コールなし"
+      }
+    </div>
+  `;
+});
 
 
   /*
@@ -988,7 +989,7 @@ function showSong(id) {
     <div class="detail-heading">
 
       <h2>
-        ${escapeHTML(song.title)} ♡
+        ${escapeHTML(song.title)} 
       </h2>
 
     </div>
