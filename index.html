@@ -43,18 +43,19 @@
 .song-image {
   width: 100%;
 
-  flex: 1;
+  aspect-ratio: 16 / 9;
 
-  min-height: 0;
+  margin: 10px 0 18px;
 
-  margin:
-    5px 0 10px;
-
-  border-radius: 12px;
+  border-radius: 14px;
 
   overflow: hidden;
 
-  background: #f9eaf2;
+  background: #f8edf4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -64,7 +65,8 @@
 
   display: block;
 
-  object-fit: cover;
+  /* 画像を切らずに全部表示 */
+  object-fit: contain;
 }
     
     .site-header {
@@ -87,23 +89,59 @@
 }
 
     .logo {
-      margin: 0;
-      font-size: 28px;
-      color: #c64e88;
-    }
+  margin: 0;
+
+  font-size: 28px;
+
+  color: #c64e88;
+
+  /* 白い輪郭線 */
+  -webkit-text-stroke: 2px white;
+
+  text-shadow:
+    2px 2px 0 white,
+    -2px 2px 0 white,
+    2px -2px 0 white,
+    -2px -2px 0 white;
+}
 
     .subtitle {
-      color: #8b627b;
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin: 4px 0 14px;
-    }
+  color: #8b627b;
+
+  font-size: 12px;
+
+  letter-spacing: 2px;
+
+  margin: 4px 0 14px;
+
+  -webkit-text-stroke: 1px white;
+
+  text-shadow:
+    1px 1px 0 white,
+    -1px 1px 0 white,
+    1px -1px 0 white,
+    -1px -1px 0 white;
+}
 
     .intro {
-      max-width: 680px;
-      margin: 0 auto;
-      font-size: 14px;
-    }
+  max-width: 680px;
+
+  margin: 0 auto;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #493746;
+
+  -webkit-text-stroke: 1px white;
+
+  text-shadow:
+    1px 1px 0 white,
+    -1px 1px 0 white,
+    1px -1px 0 white,
+    -1px -1px 0 white;
+}
 
     .nav {
       display: flex;
@@ -166,30 +204,26 @@
     .song-card {
   position: relative;
 
-  aspect-ratio: 16 / 9;
-
   background: white;
 
-  border:
-    1px solid #f0d4e2;
+  border: 1px solid #f0d4e2;
 
   border-radius: 20px;
 
-  padding: 18px;
+  padding: 20px;
 
   box-shadow:
-    0 5px 20px
-    rgba(180,90,140,0.07);
+    0 5px 20px rgba(180, 90, 140, 0.07);
 
   transition:
     transform 0.2s,
     box-shadow 0.2s;
 
   display: flex;
-
   flex-direction: column;
 
-  justify-content: space-between;
+  /* カードを縦長にする */
+  min-height: 430px;
 }
 
     .song-number {
@@ -419,24 +453,28 @@
     @media (max-width: 650px) {
 
   .song-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
   .song-card {
-    padding: 10px;
-    border-radius: 14px;
+    min-height: 350px;
+    padding: 12px;
+    border-radius: 15px;
   }
 
   .song-card h3 {
     font-size: 15px;
   }
 
+  .song-image {
+    border-radius: 10px;
+    margin: 8px 0 12px;
+  }
+
   .detail-button {
     font-size: 11px;
-    padding: 7px 8px;
+    padding: 8px 5px;
   }
 
 }
@@ -569,7 +607,7 @@
       {
   id: 1,
 
-  title: "推忍っ",
+  title: "推忍♡きゅるちゃん道場！",
 
   image: "images/doujou.jpg",
 
