@@ -222,6 +222,14 @@
       min-height: 430px;
     }
 
+    .song-update {
+      font-size: 14px;
+      color: #4b3946;
+      text-align: center;
+      margin: -6px 0 10px;
+      font-weight: 500;
+    }
+
 
     .song-card h3 {
       margin: 0 0 12px;
@@ -243,7 +251,7 @@
 
       aspect-ratio: 16 / 9;
 
-      margin: 0 0 14px;
+      margin: 0 0 10px;
 
       border-radius: 14px;
 
@@ -585,7 +593,7 @@
   <header class="site-header">
 
     <h1 class="logo">
-      きゅるしてコールまとめ♡731
+      きゅるしてコールまとめ♡739
     </h1>
 
     <div class="subtitle">
@@ -691,6 +699,7 @@
       {
         id: 1,
         title: "推忍♡きゅるちゃん道場！",
+        updateDate: "26/9/19更新",
         image: "images/doujou.jpg",
         youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
         startTime: 493,
@@ -1010,6 +1019,7 @@ Please help me…！
       {
         id: 2,
         title: "アイドルライブコースター！",
+        updateDate: "26/9/19更新",
         image: "images/idollivecoaster.jpg",
         youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
         startTime: 1441,
@@ -1198,6 +1208,7 @@ Please help me…！
       {
         id: 3,
         title: "らぶきゅん♡うぉんてっど",
+        updateDate: "26/9/19更新",
         image: "images/lovekyun.jpg",
         youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o",
         startTime: 1000,
@@ -1355,6 +1366,7 @@ Are You Ready?
       {
         id: 4,
         title: "Special♡Spell",
+        updateDate: "26/9/19更新",
         image: "images/spespe.jpg",
         youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
         startTime: 1653,
@@ -1487,6 +1499,7 @@ Special な魔法
       {
         id: 5,
         title: "イェイェ",
+        updateDate: "26/9/19更新",
         image: "images/yeye.jpg",
         youtubeId: "https://youtu.be/9y1cPIUdAEY?si=CyCqZPHcCPNsGA2g", 
         startTime: 0,
@@ -1695,6 +1708,7 @@ let me down　love me tonight`,
       {
         id: 6,
         title: "可愛さ圧倒的なんばーわん！",
+        updateDate: "26/9/19更新",
         image: "images/kawaisa.jpg",
         youtubeId: "https://youtu.be/bf7hwHHrch8?si=izF9o-OqeHMyDX_h", 
         startTime: 0,
@@ -1796,6 +1810,7 @@ let me down　love me tonight`,
       {
         id: 7,
         title: "未来の足跡",
+        updateDate: "26/8/2更新",
         image: "images/mirai.jpg",
         youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
         startTime: 1218,
@@ -1915,6 +1930,7 @@ let me down　love me tonight`,
       {
         id: 8,
         title: "♡♡♡わんだーらんど",
+        updateDate: "26/9/19更新",
         image: "images/wonder.jpg",
         youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
         startTime: 287,
@@ -2086,6 +2102,7 @@ Rabbit is blind ♡
       {
         id: 9,
         title: "絶対無敵ラブソング",
+        updateDate: "26/9/19更新",
         image: "images/muteki.jpg",
         youtubeId: "https://www.youtube.com/watch?v=4o-y3dhDLv0", 
         startTime: 0,
@@ -2188,6 +2205,7 @@ Rabbit is blind ♡
       {
         id: 10,
         title: "ムムム…Doなる!?ドリル! (feat. ミームトーキョー)",
+        updateDate: "26/9/19更新",
         image: "images/mumumu.jpg",
         youtubeId: "https://youtu.be/J1ECKxF0soE?si=LVnszITZov4AUeGz", 
         startTime: 0,
@@ -2316,6 +2334,7 @@ Penetrate Pe Penetrate
       {
         id: 11,
         title: "えぶりで大好き記念日",
+        updateDate: "26/8/25更新",
         image: "images/everyde.jpg",
         youtubeId: "https://www.youtube.com/watch?v=umOcB8yP54Q", 
         startTime: 3,
@@ -2436,6 +2455,7 @@ Marry me Marry me Marry Marry My Darling
       songList.innerHTML = list.map(song => `
         <div class="song-card">
           <h3>${song.title}</h3>
+          <div class="song-update">${song.updateDate || "3/31更新"}</div>
           <div class="song-image">
             <img src="${song.image}" alt="${song.title}" onerror="this.style.display='none'">
           </div>
