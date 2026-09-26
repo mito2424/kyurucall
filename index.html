@@ -585,7 +585,7 @@
   <header class="site-header">
 
     <h1 class="logo">
-      きゅるしてコールまとめ♡256
+      きゅるしてコールまとめ♡302
     </h1>
 
     <div class="subtitle">
@@ -814,7 +814,8 @@ Repeat after me…！
             call: "徒歩バスチャリ👏電車"
           },
           {
-            lyrics: "きゅるちゃん道場！推忍！！！",
+            lyrics: "さあ…！！
+              きゅるちゃん道場！推忍！！！",
             call: ""
           },
           {
@@ -979,7 +980,8 @@ Please help me…！
             call: "徒歩バスチャリ👏電車"
           },
           {
-            lyrics: "きゅるちゃん道場！推忍！！！",
+            lyrics: "さあ…！！煌めく夢みる
+              きゅるちゃん道場！推忍！！！",
             call: ""
           },
           {
@@ -1529,15 +1531,15 @@ Are You Ready?
       if (song.lyricsCalls && song.lyricsCalls.length > 0) {
         rowsHTML = song.lyricsCalls.map(block => `
           <div class="table-row">
-            <div class="lyrics-td">${escapeHTML(block.lyrics || "")}</div>
-            <div class="call-td">${escapeHTML(block.call || "")}</div>
+            <div class="lyrics-td">${escapeHTML(cleanText(block.lyrics))}</div>
+            <div class="call-td">${escapeHTML(cleanText(block.call))}</div>
           </div>
         `).join("");
       } else {
         rowsHTML = `
           <div class="table-row">
-            <div class="lyrics-td">${escapeHTML(song.lyrics || "")}</div>
-            <div class="call-td">${escapeHTML(song.calls || "")}</div>
+            <div class="lyrics-td">${escapeHTML(cleanText(song.lyrics))}</div>
+            <div class="call-td">${escapeHTML(cleanText(song.calls))}</div>
           </div>
         `;
       }
@@ -1566,6 +1568,18 @@ Are You Ready?
 
       window.scrollTo(0, 0);
     }
+
+    /* ========================================
+   余計な改行・スペース除去関数
+======================================== */
+function cleanText(text) {
+  if (!text) return "";
+  return text
+    .split("\n")
+    .map(line => line.trim()) // 各行の前後の空白・タブを削除
+    .join("\n")
+    .trim(); // 全体の先頭・末尾の無駄な改行を削除
+}
 
 
     /* ========================================
