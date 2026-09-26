@@ -776,7 +776,8 @@
         title: "推忍♡きゅるちゃん道場！",
 
         image: "images/doujou.jpg",
-lyrics:
+        
+        lyrics:
 `推忍♡きゅるちゃん道場始まるよ〜！（始まるよ〜）
 
 いえい♪
@@ -1540,9 +1541,7 @@ YES かね YES 答えて
 
                 <div class="lyrics-content">
 
-                  <div class="lyrics-text">
-                    ${escapeHTML(song.lyrics)}
-                  </div>
+                  <div class="lyrics-text">${escapeHTML(song.lyrics)}</div>
 
                 </div>
 
@@ -1559,9 +1558,11 @@ YES かね YES 答えて
 
                 <div class="call-content">
 
-                  <div class="call-text">
-                    ${callText}
-                  </div>
+                  <div class="call-text">${
+  song.calls && song.calls.trim() !== ""
+    ? escapeHTML(song.calls)
+    : "コール情報を準備中です。"
+}</div>
 
                 </div>
 
