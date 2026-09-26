@@ -585,7 +585,7 @@
   <header class="site-header">
 
     <h1 class="logo">
-      きゅるしてコールまとめ♡153
+      きゅるしてコールまとめ♡157
     </h1>
 
     <div class="subtitle">
@@ -987,7 +987,7 @@ Please help me…！
 （あ〜ん またかわいくなっちゃたね）`,
             call: `う！はー！う！はー！う！はー！う！はー！`
           },
-           {
+          {
             lyrics: `う！はー！う！はー！う！はー！う！はー！
 （みーんな！黒帯認定っ）`,
             call: `う！はー！う！はー！う！はー！う！はー！`
@@ -999,7 +999,6 @@ Please help me…！
           },
         ],
 
-        youtubeId: "",
         videoNote: "参考動画のYouTube IDを設定してください。"
       },
 
@@ -1278,6 +1277,17 @@ YES かね YES 答えて
 
 
     /* ========================================
+       YouTube ID抽出関数
+    ======================================== */
+
+    function extractYouTubeId(urlOrId) {
+      if (!urlOrId) return "";
+      const match = urlOrId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      return match ? match[1] : urlOrId.trim();
+    }
+
+
+    /* ========================================
        HTML安全表示
     ======================================== */
 
@@ -1423,20 +1433,22 @@ YES かね YES 答えて
       document.getElementById("detail-page").classList.remove("hidden");
 
       /* YouTube */
-let videoHTML = "";
-if (song.youtubeId && song.youtubeId.trim() !== "") {
-  // startTimeが設定されていれば ?start=秒数 を追加
-  const startParam = song.startTime ? `?start=${song.startTime}` : "";
-  const videoSrc = `https://www.youtube.com/embed/${encodeURIComponent(song.youtubeId)}${startParam}`;
+      let videoHTML = "";
+      const videoId = extractYouTubeId(song.youtubeId);
 
-  videoHTML = `
-    <div class="video-wrapper">
-      <iframe src="${videoSrc}" loading="lazy" allowfullscreen></iframe>
-    </div>
-  `;
-} else {
-  videoHTML = `<div class="notice">まだ参考動画が設定されていません。</div>`;
-}
+      if (videoId) {
+        // startTimeが設定されていれば ?start=秒数 を追加
+        const startParam = song.startTime ? `?start=${song.startTime}` : "";
+        const videoSrc = `https://www.youtube.com/embed/${videoId}${startParam}`;
+
+        videoHTML = `
+          <div class="video-wrapper">
+            <iframe src="${videoSrc}" loading="lazy" allowfullscreen></iframe>
+          </div>
+        `;
+      } else {
+        videoHTML = `<div class="notice">まだ参考動画が設定されていません。</div>`;
+      }
 
       /* 歌詞・コールの行ごと出力 */
       let rowsHTML = "";
