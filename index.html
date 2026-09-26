@@ -1,534 +1,1594 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>きゅるしてコールまとめ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap"
-    rel="stylesheet"
-  >
+  <title>きゅるしてコールまとめ</title>
 
-  <style>
-    /* ================================
-       基本
-    ================================= */
-    * {
-      box-sizing: border-box;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    body {
-      margin: 0;
-      font-family:
-        "M PLUS Rounded 1c",
-        "Arial Rounded MT Bold",
-        "Hiragino Maru Gothic ProN",
-        "Yu Gothic",
-        sans-serif;
-      color: #4b3946;
-      background: #fff8fc;
-      line-height: 1.8;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-    button,
-    input {
-      font: inherit;
-    }
+  <style>
 
-    button {
-      cursor: pointer;
-    }
+    /* ================================
+       基本
+    ================================= */
 
-    /* ================================
-       ヘッダー
-    ================================= */
-    .site-header {
-      background-image:
-        linear-gradient(
-          rgba(255, 220, 235, 0.25),
-          rgba(245, 220, 255, 0.25)
-        ),
-        url("images/header-bg.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      padding: 45px 20px 50px;
-      text-align: center;
-      border-bottom: 1px solid #efc4da;
-    }
+    * {
+      box-sizing: border-box;
+    }
 
-    .logo {
-      margin: 0;
-      font-size: 30px;
-      color: white;
-      text-shadow:
-        -2px -2px 0 #c64e88,
-         2px -2px 0 #c64e88,
-        -2px  2px 0 #c64e88,
-         2px  2px 0 #c64e88,
-         0 3px 8px rgba(120, 70, 100, 0.25);
-    }
+    body {
+      margin: 0;
 
-    .subtitle {
-      color: white;
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin: 4px 0 14px;
-      text-shadow:
-        -1px -1px 0 #a75b80,
-         1px -1px 0 #a75b80,
-        -1px  1px 0 #a75b80,
-         1px  1px 0 #a75b80;
-    }
+      font-family:
+        "M PLUS Rounded 1c",
+        "Arial Rounded MT Bold",
+        "Hiragino Maru Gothic ProN",
+        "Yu Gothic",
+        sans-serif;
 
-    .intro {
-      max-width: 680px;
-      margin: 0 auto;
-      font-size: 14px;
-      color: white;
-      text-shadow:
-        -1px -1px 0 #a75b80,
-         1px -1px 0 #a75b80,
-        -1px  1px 0 #a75b80,
-         1px  1px 0 #a75b80;
-    }
+      color: #4b3946;
+      background: #fff8fc;
 
-    .nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
+      line-height: 1.8;
+    }
 
-    .nav button,
-    .back-button {
-      border: 1px solid #e9a8c9;
-      background: white;
-      color: #bd4b83;
-      border-radius: 999px;
-      padding: 8px 18px;
-      font-weight: bold;
-    }
+    button,
+    input {
+      font: inherit;
+    }
 
-    /* ================================
-       全体
-    ================================= */
-    .container {
-      max-width: 1050px;
-      margin: 0 auto;
-      padding: 30px 16px 60px;
-    }
+    button {
+      cursor: pointer;
+    }
 
-    /* ================================
-       検索
-    ================================= */
-    .search-box {
-      display: block;
-      width: 100%;
-      padding: 13px 16px;
-      border: 1px solid #efc3da;
-      border-radius: 12px;
-      background: white;
-      outline-color: #d66b9e;
-      margin-bottom: 20px;
-    }
 
-    /* ================================
-       曲一覧
-    ================================= */
-    .song-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
+    /* ================================
+       ヘッダー
+    ================================= */
 
-    .song-card {
-      background: white;
-      border: 1px solid #f0d4e2;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 5px 20px rgba(180, 90, 140, 0.07);
-      display: flex;
-      flex-direction: column;
-      min-height: 430px;
-    }
+    .site-header {
+      background-image:
+        linear-gradient(
+          rgba(255, 220, 235, 0.25),
+          rgba(245, 220, 255, 0.25)
+        ),
+        url("images/header-bg.jpg");
 
-    .song-card h3 {
-      margin: 0 0 12px;
-      color: #bd4b83;
-      font-size: 20px;
-      text-align: center;
-    }
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
 
-    /* ================================
-       サムネイル
-    ================================= */
-    .song-image {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      margin: 0 0 18px;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #f8edf4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      padding: 45px 20px 50px;
 
-    .song-image img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-    }
+      text-align: center;
 
-    /* ================================
-       曲を見るボタン
-    ================================= */
-    .detail-button {
-      border: none;
-      border-radius: 999px;
-      padding: 10px 16px;
-      background: #d8669c;
-      color: white;
-      font-weight: bold;
-      margin-top: auto;
-    }
+      border-bottom: 1px solid #efc4da;
+    }
 
-    .detail-button:hover {
-      background: #bd4b83;
-    }
 
-    /* ================================
-       曲別ページ
-    ================================= */
-    .back-button {
-      margin-bottom: 20px;
-    }
+    .logo {
+      margin: 0;
 
-    .detail-heading {
-      background: linear-gradient(135deg, #ffe1ee, #f3e4ff);
-      border-radius: 18px;
-      padding: 25px;
-      margin-bottom: 22px;
-      text-align: center;
-    }
+      font-size: 30px;
 
-    .detail-heading h2 {
-      color: #bd4b83;
-      margin: 0;
-      font-size: 28px;
-    }
+      color: white;
 
-    /* ================================
-       セクション
-    ================================= */
-    .section {
-      background: white;
-      border: 1px solid #f1d4e3;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
+      text-shadow:
+        -2px -2px 0 #c64e88,
+         2px -2px 0 #c64e88,
+        -2px  2px 0 #c64e88,
+         2px  2px 0 #c64e88,
+         0 3px 8px rgba(120, 70, 100, 0.25);
+    }
 
-    .section h3 {
-      margin-top: 0;
-      color: #bd4b83;
-      font-size: 20px;
-      border-bottom: 2px solid #f8d9e8;
-      padding-bottom: 8px;
-    }
 
-    /* ================================
-       歌詞・コール
-    ================================= */
-    .lyrics-call-table {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .subtitle {
+      color: white;
 
-    .table-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 8px;
-    }
+      font-size: 12px;
 
-    .lyrics-th {
-      background: #f8e6f0;
-      color: #bd4b83;
-      padding: 10px;
-      border-radius: 8px;
-    }
+      letter-spacing: 2px;
 
-    .call-th {
-      background: #f3e8fb;
-      color: #9555a8;
-      padding: 10px;
-      border-radius: 8px;
-    }
+      margin: 4px 0 14px;
 
-    .table-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      border-bottom: 1px dashed #f0d4e2;
-      padding-bottom: 10px;
-    }
+      text-shadow:
+        -1px -1px 0 #a75b80,
+         1px -1px 0 #a75b80,
+        -1px  1px 0 #a75b80,
+         1px  1px 0 #a75b80;
+    }
 
-    .lyrics-td, .call-td {
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      font-size: 14px;
-      line-height: 1.8;
-    }
 
-    .lyrics-td { color: #4b3946; }
-    .call-td { color: #b13e76; font-weight: 700; }
+    .intro {
+      max-width: 680px;
 
-    /* ================================
-       YouTube
-    ================================= */
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      overflow: hidden;
-      border-radius: 12px;
-      background: #f8e9f1;
-    }
+      margin: 0 auto;
 
-    .video-wrapper iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+      font-size: 14px;
 
-    .empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      color: #92788a;
-      padding: 30px;
-      background: white;
-      border-radius: 14px;
-    }
+      color: white;
 
-    .site-footer {
-      text-align: center;
-      background: #f8e3ef;
-      color: #977287;
-      padding: 25px 15px;
-      font-size: 12px;
-    }
+      text-shadow:
+        -1px -1px 0 #a75b80,
+         1px -1px 0 #a75b80,
+        -1px  1px 0 #a75b80,
+         1px  1px 0 #a75b80;
+    }
 
-    .hidden {
-      display: none !important;
-    }
 
-    @media (max-width: 650px) {
-      .logo { font-size: 23px; }
-      .song-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-      .song-card { min-height: 350px; padding: 12px; border-radius: 15px; }
-      .song-card h3 { font-size: 15px; }
-      .song-image { border-radius: 10px; margin-bottom: 12px; }
-      .detail-button { font-size: 11px; padding: 8px 5px; }
-      .detail-heading h2 { font-size: 23px; }
-      .section { padding: 12px; }
-      .container { padding-top: 20px; }
-    }
-  </style>
+    .nav {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 20px;
+    }
+
+
+    .nav button,
+    .back-button {
+      border: 1px solid #e9a8c9;
+
+      background: white;
+
+      color: #bd4b83;
+
+      border-radius: 999px;
+
+      padding: 8px 18px;
+
+      font-weight: bold;
+    }
+
+
+    /* ================================
+       全体
+    ================================= */
+
+    .container {
+      max-width: 1050px;
+
+      margin: 0 auto;
+
+      padding: 30px 16px 60px;
+    }
+
+
+    /* ================================
+       検索
+    ================================= */
+
+    .search-box {
+      display: block;
+
+      width: 100%;
+
+      padding: 13px 16px;
+
+      border: 1px solid #efc3da;
+
+      border-radius: 12px;
+
+      background: white;
+
+      outline-color: #d66b9e;
+
+      margin-bottom: 20px;
+    }
+
+
+    /* ================================
+       曲一覧
+    ================================= */
+
+    .song-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+
+    .song-card {
+      background: white;
+
+      border: 1px solid #f0d4e2;
+
+      border-radius: 20px;
+
+      padding: 20px;
+
+      box-shadow:
+        0 5px 20px rgba(180, 90, 140, 0.07);
+
+      display: flex;
+
+      flex-direction: column;
+
+      min-height: 430px;
+    }
+
+
+    .song-card h3 {
+      margin: 0 0 12px;
+
+      color: #bd4b83;
+
+      font-size: 20px;
+
+      text-align: center;
+    }
+
+
+    /* ================================
+       サムネイル
+    ================================= */
+
+    .song-image {
+      width: 100%;
+
+      aspect-ratio: 16 / 9;
+
+      margin: 0 0 18px;
+
+      border-radius: 14px;
+
+      overflow: hidden;
+
+      background: #f8edf4;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+    }
+
+
+    .song-image img {
+      width: 100%;
+
+      height: 100%;
+
+      display: block;
+
+      object-fit: contain;
+    }
+
+
+    /* ================================
+       曲を見るボタン
+    ================================= */
+
+    .detail-button {
+      border: none;
+
+      border-radius: 999px;
+
+      padding: 10px 16px;
+
+      background: #d8669c;
+
+      color: white;
+
+      font-weight: bold;
+
+      margin-top: auto;
+    }
+
+
+    .detail-button:hover {
+      background: #bd4b83;
+    }
+
+
+    /* ================================
+       曲別ページ
+    ================================= */
+
+    .back-button {
+      margin-bottom: 20px;
+    }
+
+
+    .detail-heading {
+      background:
+        linear-gradient(
+          135deg,
+          #ffe1ee,
+          #f3e4ff
+        );
+
+      border-radius: 18px;
+
+      padding: 25px;
+
+      margin-bottom: 22px;
+
+      text-align: center;
+    }
+
+
+    .detail-heading h2 {
+      color: #bd4b83;
+
+      margin: 0;
+
+      font-size: 28px;
+    }
+
+
+    /* ================================
+       セクション
+    ================================= */
+
+    .section {
+      background: white;
+
+      border: 1px solid #f1d4e3;
+
+      border-radius: 16px;
+
+      padding: 20px;
+
+      margin-bottom: 20px;
+    }
+
+
+    .section h3 {
+      margin-top: 0;
+
+      color: #bd4b83;
+
+      font-size: 20px;
+
+      border-bottom:
+        2px solid #f8d9e8;
+
+      padding-bottom: 8px;
+    }
+
+
+    /* ================================
+       歌詞・コール（ブロック表示）
+    ================================= */
+
+    .lyrics-call-table {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .lyrics-th {
+      background: #f8e6f0;
+      color: #bd4b83;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .call-th {
+      background: #f3e8fb;
+      color: #9555a8;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      border-bottom: 1px dashed #f0d4e2;
+      padding-bottom: 10px;
+    }
+
+    .lyrics-td, .call-td {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .lyrics-td { color: #4b3946; }
+    .call-td { color: #b13e76; font-weight: 700; }
+
+
+    /* ================================
+       YouTube
+    ================================= */
+
+    .video-wrapper {
+      position: relative;
+
+      width: 100%;
+
+      padding-top: 56.25%;
+
+      overflow: hidden;
+
+      border-radius: 12px;
+
+      background: #f8e9f1;
+    }
+
+
+    .video-wrapper iframe {
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      border: 0;
+    }
+
+
+    .notice {
+      font-size: 12px;
+
+      color: #947687;
+
+      background: #fff8fc;
+
+      padding: 12px;
+
+      border-radius: 8px;
+
+      margin-top: 12px;
+
+      overflow-wrap: anywhere;
+    }
+
+
+    /* ================================
+       曲がない場合
+    ================================= */
+
+    .empty {
+      grid-column: 1 / -1;
+
+      text-align: center;
+
+      color: #92788a;
+
+      padding: 30px;
+
+      background: white;
+
+      border-radius: 14px;
+    }
+
+
+    /* ================================
+       フッター
+    ================================= */
+
+    .site-footer {
+      text-align: center;
+
+      background: #f8e3ef;
+
+      color: #977287;
+
+      padding: 25px 15px;
+
+      font-size: 12px;
+    }
+
+
+    /* ================================
+       非表示
+    ================================= */
+
+    .hidden {
+      display: none !important;
+    }
+
+
+    /* ================================
+       スマホ
+    ================================= */
+
+    @media (max-width: 650px) {
+
+      .logo {
+        font-size: 23px;
+      }
+
+
+      .song-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+      }
+
+
+      .song-card {
+        min-height: 350px;
+
+        padding: 12px;
+
+        border-radius: 15px;
+      }
+
+
+      .song-card h3 {
+        font-size: 15px;
+      }
+
+
+      .song-image {
+        border-radius: 10px;
+
+        margin-bottom: 12px;
+      }
+
+
+      .detail-button {
+        font-size: 11px;
+
+        padding: 8px 5px;
+      }
+
+
+      .detail-heading h2 {
+        font-size: 23px;
+      }
+
+      .section {
+        padding: 12px;
+      }
+
+
+      .container {
+        padding-top: 20px;
+      }
+
+    }
+
+  </style>
 </head>
+
 
 <body>
 
-  <header class="site-header">
-    <h1 class="logo">きゅるしてコールまとめ♡311</h1>
-    <div class="subtitle">KYURURIN TE SHITEMITE</div>
-    <p class="intro">
-      きゅるしてのコールを知りたい！<br>
-      けど正しい情報がわからない人必見！！<br>
-      主が現場参戦する度に更新し、
-      流動的に変わるコールの最新情報をお届け！
-    </p>
-    <nav class="nav">
-      <button onclick="showHome()">🏠 ホーム</button>
-    </nav>
-  </header>
 
-  <main class="container">
-    <!-- ホーム -->
-    <section id="home-page">
-      <input
-        id="search"
-        class="search-box"
-        type="search"
-        placeholder="🔍 曲名を検索…"
-        oninput="searchSongs()"
-      >
-      <div id="song-list" class="song-grid"></div>
-    </section>
+  <!-- ================================
+       ヘッダー
+  ================================= -->
 
-    <!-- 曲別ページ -->
-    <section id="detail-page" class="hidden">
-      <button class="back-button" onclick="showHome()">← 曲一覧に戻る</button>
-      <div id="song-detail"></div>
-    </section>
-  </main>
+  <header class="site-header">
 
-  <footer class="site-footer">
-    きゅるしてコールまとめ<br>
-    Fan-made reference site
-  </footer>
+    <h1 class="logo">
+      きゅるしてコールまとめ♡319
+    </h1>
 
-  <script>
-    /* ========================================
-       曲データ
-    ======================================== */
-    const songs = [
-      {
-        id: 1,
-        title: "推忍♡きゅるちゃん道場！",
-        image: "images/doujou.jpg",
-        youtubeUrl: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
-        startTime: 493,
-        lyricsCalls: [
-          { lyrics: "推忍♡きゅるちゃん道場始まるよ〜！", call: "" },
-          { lyrics: "", call: "推忍！" },
-          { lyrics: "ねえ〜もっとかわいくなりたい！", call: "う！はー！う！はー！" },
-          { lyrics: "準備はいいですか？", call: "推忍！" }
-        ]
-      },
-      {
-        id: 2,
-        title: "アイドルライブコースター！",
-        image: "images/idollivecoaster.jpg",
-        youtubeUrl: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
-        startTime: 1441,
-        lyricsCalls: [
-          { lyrics: "楽しむ準備いいですか？", call: "イェイ！" },
-          { lyrics: "れでい？れでい？れっつごー！", call: "ハイ！ハイ！きゅるちゃん！" }
-        ]
-      },
-      {
-        id: 3,
-        title: "らぶきゅん♡うぉんてっど",
-        image: "images/lovekyun.jpg",
-        youtubeUrl: "https://www.youtube.com/watch?v=GaJ270U7d2o",
-        startTime: 1000,
-        lyricsCalls: [
-          { lyrics: "Are You Ready?", call: "" },
-          { lyrics: "キミを一番好きなのはわたしだもん！", call: "タイガー！ファイヤー！サイバー！" }
-        ]
-      }
-    ];
+    <div class="subtitle">
+      KYURURIN TE SHITEMITE
+    </div>
 
-    /* ========================================
-       描画・制御ロジック
-    ======================================== */
+    <p class="intro">
 
-    // YouTube URLから埋め込み用URLを生成
-    function formatYoutubeUrl(url, startTime = 0) {
-      if (!url) return "";
-      let videoId = "";
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-      const match = url.match(regExp);
-      if (match && match[2].length === 11) {
-        videoId = match[2];
-      }
-      return `https://www.youtube.com/embed/${videoId}?start=${startTime}`;
-    }
+      きゅるしてのコールを知りたい！<br>
+      けど正しい情報がわからない人必見！！<br>
+      主が現場参戦する度に更新し、
+      流動的に変わるコールの最新情報をお届け！
 
-    // ホーム画面の曲カード一覧表示
-    function renderSongs(songArray) {
-      const listContainer = document.getElementById("song-list");
-      if (songArray.length === 0) {
-        listContainer.innerHTML = `<div class="empty">該当する曲が見つかりません。</div>`;
-        return;
-      }
+    </p>
 
-      listContainer.innerHTML = songArray.map(song => `
-        <article class="song-card">
-          <h3>${song.title}</h3>
-          <div class="song-image">
-            <img src="${song.image}" alt="${song.title}" onerror="this.src='https://via.placeholder.com/300x169?text=No+Image'">
-          </div>
-          <button class="detail-button" onclick="showDetail(${song.id})">
-            コールを見る
-          </button>
-        </article>
-      `).join('');
-    }
+    <nav class="nav">
 
-    // 検索処理
-    function searchSongs() {
-      const keyword = document.getElementById("search").value.toLowerCase().trim();
-      const filtered = songs.filter(song => song.title.toLowerCase().includes(keyword));
-      renderSongs(filtered);
-    }
+      <button onclick="showHome()">
+        🏠 ホーム
+      </button>
 
-    // 詳細画面を表示
-    function showDetail(id) {
-      const song = songs.find(s => s.id === id);
-      if (!song) return;
+    </nav>
 
-      const detailContainer = document.getElementById("song-detail");
-      const embedUrl = formatYoutubeUrl(song.youtubeUrl, song.startTime);
+  </header>
 
-      const rowsHtml = song.lyricsCalls.map(item => `
-        <div class="table-row">
-          <div class="lyrics-td">${item.lyrics || ''}</div>
-          <div class="call-td">${item.call || ''}</div>
-        </div>
-      `).join('');
 
-      detailContainer.innerHTML = `
-        <div class="detail-heading">
-          <h2>${song.title}</h2>
-        </div>
+  <!-- ================================
+       メイン
+  ================================= -->
 
-        <section class="section">
-          <h3>📹 参考動画</h3>
-          <div class="video-wrapper">
-            <iframe src="${embedUrl}" allowfullscreen></iframe>
-          </div>
-        </section>
+  <main class="container">
 
-        <section class="section">
-          <h3>🎤 歌詞・コール</h3>
-          <div class="lyrics-call-table">
-            <div class="table-header">
-              <div class="lyrics-th">歌詞</div>
-              <div class="call-th">コール</div>
-            </div>
-            ${rowsHtml}
-          </div>
-        </section>
-      `;
 
-      document.getElementById("home-page").classList.add("hidden");
-      document.getElementById("detail-page").classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    <!-- ================================
+         ホーム
+    ================================= -->
 
-    // ホーム画面に戻る
-    function showHome() {
-      document.getElementById("home-page").classList.remove("hidden");
-      document.getElementById("detail-page").classList.add("hidden");
-    }
+    <section id="home-page">
 
-    // 初回読み込み時のレンダリング
-    document.addEventListener("DOMContentLoaded", () => {
-      renderSongs(songs);
-    });
-  </script>
+      <input
+        id="search"
+        class="search-box"
+        type="search"
+        placeholder="🔍 曲名を検索…"
+        oninput="searchSongs()"
+      >
+
+      <div
+        id="song-list"
+        class="song-grid">
+      </div>
+
+    </section>
+
+
+    <!-- ================================
+         曲別ページ
+    ================================= -->
+
+    <section
+      id="detail-page"
+      class="hidden">
+
+      <button
+        class="back-button"
+        onclick="showHome()">
+
+        ← 曲一覧に戻る
+
+      </button>
+
+      <div id="song-detail"></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================================
+       フッター
+  ================================= -->
+
+  <footer class="site-footer">
+
+    きゅるしてコールまとめ<br>
+    Fan-made reference site
+
+  </footer>
+
+
+  <script>
+
+    /* ========================================
+       曲データ
+    ======================================== */
+
+    const songs = [
+
+      /* ======================================
+          1. 推忍♡きゅるちゃん道場！
+      ======================================= */
+
+      {
+        id: 1,
+        title: "推忍♡きゅるちゃん道場！",
+        image: "images/doujou.jpg",
+        youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
+        startTime: 493,
+
+        lyricsCalls: [
+          {
+            lyrics: `推忍♡きゅるちゃん道場始まるよ〜！（始まるよ〜）`,
+            call: ``
+          },
+          {
+            lyrics: ``,
+            call: `推忍！`
+          },
+          {
+            lyrics: "いえい♪",
+            call: ""
+          },
+          {
+            lyrics: `う！はー！う！はー！う！はー！う！はー！
+ねえ〜もっとかわいくなりたい！`,
+            call: `う！はー！う！はー！う！はー！う！はー！`
+          },
+          {
+            lyrics: `う！はー！う！はー！う！はー！う！はー！
+かわいいは一日にしてならず
+さあ 準備はいいですか？`,
+            call: `う！はー！う！はー！う！はー！う！はー！`
+          },
+          {
+            lyrics: "",
+            call: "推忍！"
+          },
+          {
+            lyrics: `世界中の誰しもみんな 修行中なんです(頑張っちゃう)
+自分史上最高記録 毎分毎秒アプデなり`,
+            call: ""
+          },
+          {
+            lyrics: `（せーのっ！）
+（いち！）メイクとおしゃれは日々研究♡`,
+            call: `
+いち！`
+          },
+          {
+            lyrics: `（に！）恋する心を忘れない♡`,
+            call: `に！`
+          },
+          {
+            lyrics: `（さん！）自分を愛すべし♡
+Repeat after me…！
+大っきい声で言えるかな？`,
+            call: `さん！`
+          },
+          {
+            lyrics: "",
+            call: "はいっ！はいっ！"
+          },
+          {
+            lyrics: "まだまだ やれんのーっ？",
+            call: ""
+          },
+          {
+            lyrics: "",
+            call: "はーい！"
+          },
+          {
+            lyrics: "ついて来れんのーっ？？",
+            call: ""
+          },
+          {
+            lyrics: "",
+            call: "はーい！"
+          },
+          {
+            lyrics: `きゅるきゅるできんのーっ？？？
+「くらえっ♡必殺きゅるりんパンチ！」えいっ`,
+            call: ""
+          },
+          {
+            lyrics: `Try me…？
+推忍っ♡ 推忍っ♡ 推忍っ♡ 最強級ハート♡`,
+            call: ""
+          },
+          {
+            lyrics: "（えいっ やー！）",
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: "ポーズっ♡ ポーズっ♡ ポーズっ♡ 即KOキュート♡",
+            call: ""
+          },
+          {
+            lyrics: "（えいっ やー！）",
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: `Follow me…！
+おつっ♡ おつっ♡ おつっ♡ 嫌なものはミュート♡`,
+            call: ""
+          },
+          {
+            lyrics: "（えいっ やー！）",
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: "我が道を進め！！！（心得てね？）",
+            call: ""
+          },
+          {
+            lyrics: `ちゅ ちゅ ちゅ ちゅーか ちゅーか 天才なんじゃん
+ちゅ ちゅ ちゅ ちゅーか ちゅーか キミしか勝たん♡`,
+            call: `ちゅ ちゅ ちゅ ちゅーか ちゅーか
+ちゅ ちゅ ちゅ ちゅーか ちゅーか`
+          },
+          {
+            lyrics: "好きこそ一番の才能だっ 行くよ…！",
+            call: ""
+          },
+          {
+            lyrics: "",
+            call: "徒歩バスチャリ👏電車"
+          },
+          {
+            lyrics: `さあ…！！
+              きゅるちゃん道場！推忍！！！`,
+            call: ""
+          },
+          {
+            lyrics: `う！はー！う！はー！う！はー！う！はー！
+（もう〜！疲れてお腹すいたー）`,
+            call: `う！はー！う！はー！う！はー！う！はー！`
+          },
+          {
+            lyrics: `う！はー！う！はー！う！はー！う！はー！
+そんなんじゃ置いてっちゃうよ〜
+（つらいー！）（わ！？）`,
+            call: `う！はー！う！はー！う！はー！う！はー！`
+          },
+          {
+            lyrics: "道を開けなさい 女神のお通り ようこそ下剋上♡",
+            call: "（できる限りの拍手👏）"
+          },
+          {
+            lyrics: `（お手を拝借っ！）
+（よん！）越えられない試練はない！`,
+            call: `
+よん！👏（一本締め）`
+          },
+          {
+            lyrics: `ポジティブ最新型っ♡（ピース）`,
+            call: `(ピース✌)`
+          },
+          {
+            lyrics: `（ご！）涙の数だけ人生盛れちゃうの♡`,
+            call: `ご！`
+          },
+          {
+            lyrics: `（ろく！）自分を全力信じるべし♡
+（ってあれ？）なんか前髪変かも〜(；；)
+Please help me…！
+まあいっか精神で行こ！`,
+            call: `ろく！`
+          },
+          {
+            lyrics: "",
+            call: "はいっ！はいっ！"
+          },
+          {
+            lyrics: "まだまだ いけんのーっ？",
+            call: ""
+          },
+          {
+            lyrics: "",
+            call: "はーい！"
+          },
+          {
+            lyrics: "気合い入ってんのーっ？？\n",
+            call: ""
+          },
+          {
+            lyrics: "",
+            call: "はーい！"
+          },
+          {
+            lyrics: `きゅるきゅるしたいのーっ？？？
+「覚悟っ♡必殺きゅるりんキック！」ふぁいっ`,
+            call: ""
+          },
+          {
+            lyrics: `Taste me…！
+推忍っ♡ 推忍っ♡ 推忍っ♡ 超熱狂モード♡`,
+            call: ""
+          },
+          {
+            lyrics: "（えいっ やー！）",
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: "レスっ♡ レスっ♡ レスっ♡ プリティカルヒット♡",
+            call: ""
+          },
+          {
+            lyrics: "（えいっ やー！）",
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: `Look at me…！
+おこっ♡ おこっ♡ おこっ♡ よそ見はアウト♡`,
+            call: ""
+          },
+          {
+            lyrics: `（えいっ やー！）
+わがままでごめんっ（許してよね？）`,
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: `推忍っ (一緒に！) 
+推忍っ (やねちゃん！) 
+推忍っ（あむちゃん！）
+塵も積もればきゅるとなる♡`,
+            call: `
+やねちゃん！
+あむちゃん！`
+          },
+          {
+            lyrics: `推忍っ （うたちゃん！）
+推忍っ （ゆなちゃん！）
+笑う門にはきゅる来たる♡
+もっときゅるりんってしてー！！！`,
+            call: `うたちゃん！
+ゆなちゃん！`
+          },
+          {
+            lyrics: "",
+            call: `Fooooo！！！（日体大！日体大！日体大！うっ！）
+日体大！日体大！日体大！うっ！
+日体大！日体大！日体大！うっ！
+レッツゴー！日体大！`
+          },
+          {
+            lyrics: `追求は永久に終わらない（精進っ 精進っ）
+本気だせんのー？？？ いざ参る！`,
+            call: "精進っ 精進っ（うたゆなあむと同じ振り）"
+          },
+          {
+            lyrics: `Try me…？
+推忍っ♡ 推忍っ♡ 推忍っ♡ 最強級ハート♡`,
+            call: ""
+          },
+          {
+            lyrics: "（えいっ やー！）",
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: "ポーズっ♡ ポーズっ♡ ポーズっ♡ 即KOキュート♡",
+            call: ""
+          },
+          {
+            lyrics: "（えいっ やー！）",
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: `Follow me…！
+おつっ♡ おつっ♡ おつっ♡ 嫌なものはミュート♡`,
+            call: ""
+          },
+          {
+            lyrics: "（えいっ やー！）",
+            call: "えいっやー♡"
+          },
+          {
+            lyrics: "我が道を進め！！！（心得てね？）",
+            call: ""
+          },
+          {
+            lyrics: `ちゅ ちゅ ちゅ ちゅーか ちゅーか 天才なんじゃん
+ちゅ ちゅ ちゅ ちゅーか ちゅーか キミしか勝たん♡`,
+            call: `ちゅ ちゅ ちゅ ちゅーか ちゅーか
+ちゅ ちゅ ちゅ ちゅーか ちゅーか`
+          },
+          {
+            lyrics: "好きこそ一番の才能だっ 行くよ…！",
+            call: ""
+          },
+          {
+            lyrics: "",
+            call: "徒歩バスチャリ👏電車"
+          },
+          {
+            lyrics: `さあ…！！煌めく夢みる
+              きゅるちゃん道場！推忍！！！`,
+            call: ""
+          },
+          {
+            lyrics: `う！はー！う！はー！う！はー！う！はー！
+（あ〜ん またかわいくなっちゃたね）`,
+            call: `う！はー！う！はー！う！はー！う！はー！`
+          },
+          {
+            lyrics: `う！はー！う！はー！う！はー！う！はー！
+（みーんな！黒帯認定っ）`,
+            call: `う！はー！う！はー！う！はー！う！はー！`
+          },
+          {
+            lyrics: `たいへんよくできました◎
+今日の修行 おしまい♡`,
+            call: "桃！栗！芋！乳！妹！油！段ボール！"
+          },
+        ],
+
+        videoNote: "参考動画のYouTube IDを設定してください。"
+      },
+
+
+      /* ======================================
+          2. アイドルライブコースター！
+      ======================================= */
+
+      {
+        id: 2,
+        title: "アイドルライブコースター！",
+        image: "images/idollivecoaster.jpg",
+        youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o", 
+        startTime: 1441,
+
+        lyricsCalls: [          
+          {
+            lyrics: `へい！うえるかむ
+れでいーあんどじぇんとるめん！
+楽しむ準備いいですか？`,
+            call: ``
+          },
+          {
+            lyrics: ``,
+            call: `イェイ！`
+          },
+          {
+            lyrics: `アイドルライブコースター出発です
+れでい？れでい？れでい？れでい？れっつごー！`,
+            call: ``
+          },
+          {
+            lyrics: `ハイ！ハイ！ハイ！ハイ！ハイ！ハイ！きゅるちゃん！`,
+            call: `ハイ！ハイ！ハイ！ハイ！ハイ！ハイ！きゅるちゃん！`
+          },
+          {
+            lyrics: `ハイ！ハイ！ハイ！ハイ！ハイ！ハイ！きゅるちゃん！`,
+            call: `ハイ！ハイ！ハイ！ハイ！ハイ！ハイ！きゅるちゃん！`
+          },
+          {
+            lyrics: `みんな早くここに集合！
+笑顔のパスを忘れずに`,
+            call: `
+            あ！あ！あー！あむちゃん！`
+          },
+          {
+            lyrics: `"ワガママに騒ぐ”が
+            キャッチコピー`,
+            call: `
+            おーれーの！うたちゃん！`
+          },
+          {
+            lyrics: `きらきら超光る
+            ペンライト
+            ぐるぐる超回る
+            キラーソング`,
+            call: `
+            あー！やねちゃん！
+            
+            あー！やねちゃん`
+          },
+          {
+            lyrics: `どうしよう！ドキドキ
+            止まらない ヤバない？メリーゴーランド`,
+            call: `
+            おーれーの！ゆなちゃん！`
+          },
+          {
+            lyrics: `最前も最後も関係ない
+（ウォイ！ウォイ！ウォイ！ウォイ！）`,
+            call: `
+            ウォイ！ウォイ！ウォイ！ウォイ！`
+          },
+          {
+            lyrics: `みんなちゃんと見えてるよ
+今想いを伝えて`,
+            call: ``
+          },
+          {
+            lyrics: `（かわいい！かわいい！超かわいい！）`,
+            call: `かわいい！かわいい！超かわいい！`
+          },
+          {
+            lyrics: `ハートでジャンプ！叫んでアイ！
+休んでないでもっと踊るっ
+もう一度！ジャンプ！？届いてアイ！
+レスはキス♥受けとって ちゅっ`,
+            call: ``
+          },
+          {
+            lyrics: `一番！（ハイ！ハイ！）
+一番！（ハイ！ハイ！）
+一番キミが！
+ねえ 楽しんでくれなきゃヤダ！
+きゅるしてランド！`,
+            call: `ハイ！ハイ！
+            ハイ！ハイ！`
+          },
+           {
+            lyrics: ``,
+            call: `うっおい！×4 
+            👏👏👏👏👏しゃー行くぞ！
+虎！火！人造！繊維！海女！振動！化繊！`
+          },
+           {
+            lyrics: `「行くよっ二番！」
+なんか落ち込んじゃうときは
+そう わたしに会いにきて`,
+            call: ``
+          },
+           {
+            lyrics: `キミも（きゅるちゃん！）`,
+            call: `きゅるちゃん！`
+          },
+           {
+            lyrics: `キミも（きゅるちゃん！）
+元気にしちゃうから`,
+            call: `きゅるちゃん！`
+          },
+           {
+            lyrics: `なんて本当はいついつでも
+            こっちがパワーもらってる
+運命じゃなきゃありえない
+絶対結婚しようなー！`,
+            call: ``
+          },
+           {
+            lyrics: `（好き好き大好きめっちゃ好き！）`,
+            call: `好き好き大好きめっちゃ好き！`
+          },
+           {
+            lyrics: `まわせタオル！弾けてアイ！
+油断しないでもっと笑顔っ
+もういっちょタオル！光るアセ
+史上最高 きらめきちゅうっ`,
+            call: `（タオル回す）`
+          },
+           {
+            lyrics: `一番！（ハイ！ハイ！）
+一番！（ハイ！ハイ！）一番キミが！
+ねえ 推してくれなくちゃヤダ！萌やしてしてラブ！`,
+            call: `ハイ！ハイ！
+            ハイ！ハイ！`
+          },
+           {
+            lyrics: `言えないけど分かるでしょ？
+なんたってわたしが…わたしが…！
+世界一愛してるーーーーー！`,
+            call: ``
+          },
+           {
+            lyrics: `（ア・イ・シ・テ・ルー！！）`,
+            call: `ア・イ・シ・テ・ルー！！`
+          },
+           {
+            lyrics: `パッと咲いた花火みたい
+楽しい時間早すぎて
+絶対また会えるよね？
+なら 名前を呼んで`,
+            call: ``
+          },
+           {
+            lyrics: ``,
+            call: `超絶かわいい○○ちゃん！`
+          },
+          {
+            lyrics: `ハートでジャンプ！叫んでアイ！
+休んでないでもっと踊ろっ
+もう一度！ジャンプ！？届いてアイ！
+レスはキス♡受けとって ちゅっ`,
+            call: ``
+          },
+          {
+            lyrics: `一番！（ハイ！ハイ！）
+一番！（ハイ！ハイ！）一番キミが！
+ねえ 楽しんでくれなきゃヤダ！きゅるしてランド！
+キミに最大級のラブ！`,
+            call: `ハイ！ハイ！
+            ハイ！ハイ！`
+          },
+          {
+            lyrics: ``,
+            call: `うっおい！×4 
+            👏👏👏👏👏しゃー行くぞ！
+            桃！栗！芋！乳！妹！油！段ボール！`
+          },
+        ],
+
+        videoNote: "参考動画のYouTube IDを設定してください。"
+      },
+
+
+      /* ======================================
+          3. らぶきゅん♡うぉんてっど
+      ======================================= */
+
+      {
+        id: 3,
+        title: "らぶきゅん♡うぉんてっど",
+        image: "images/lovekyun.jpg",
+        youtubeId: "https://www.youtube.com/watch?v=GaJ270U7d2o",
+        startTime: 1000,
+
+        lyricsCalls: [          
+          {
+            lyrics: `Are You Ready?
+            らぶきゅん♡うぉんてっど`,
+            call: ``
+          },
+           {
+            lyrics: `ねえ ねえ キミに告げる
+            周囲はもう包囲されてんの
+逃げるのなんて諦めて？
+キミを一番好きなのはわたしだもん！
+あー！どこ行くの〜！？
+世界中に指名手配してやるー！！！`,
+            call: `わお！うっおい！×4 
+            👏👏👏👏👏しゃー行くぞ！
+タイガー！ファイヤー！サイバー！ファイバー！ダイバー！バイバー！！ジャージャー！`
+          },
+           {
+            lyrics: `かわいいこなら誰でもいいの？
+            (そう プリンセスは一人でOK)
+悪いこは手錠しなきゃね
+（インスタフォローは重罪！）`,
+            call: ``
+          },
+           {
+            lyrics: `今日もHide & Seek 
+            見つけた♡ なんつー イージーゲーム
+“想いは重い常識◎”
+キミ検定は100点
+わたししか勝たんのです`,
+            call: ``
+          },
+           {
+            lyrics: `女子だとか男子とか 関係ないやきもち
+            もっと 独り占めさせてよ 
+            (嫌！わたしにだけ優しくすんの)
+やっぱやっぱ やばやば
+せーのっで狙い撃ち (ばん♡ばん♡)`,
+            call: `👏👏あーむちゃん！x4`
+          },
+           {
+            lyrics: `しゅきちゅ ばっきゅん！ ハート命中
+らぶ過ぎて 罪詰みみ（ばん♡ばん♡）
+どきっ 超魔球 わ！ご臨終
+即逮捕ですっ 
+(うぉんてっど♡ うぉんてっど♡)`,
+            call: ``
+          },
+           {
+            lyrics: `どうしよっか Merry or Killing
+            どっちとも永遠だね
+わがままだって 泣き虫だって
+全部を愛してね
+Are You Ready？ 
+らぶきゅん♡うぉんてっど`,
+            call: ``
+          },
+           {
+            lyrics: ``,
+            call: `わお！うっおい！×4 
+            👏👏👏👏👏しゃー行くぞ！
+            虎！火！人造！繊維！海女！振動！化繊！`
+          },
+           {
+            lyrics: `賛成！沼る刑にしてやる
+            反対！“顔はいい”って褒めてないよね！？
+恋焦がれ中でも (はーい) 
+０時には寝ます 
+宣誓！頑張るもん明日から 痛っ`,
+            call: ``
+          },
+           {
+            lyrics: `ああもう High & Sick 
+            バレちゃった わんつー エゴサーチ
+“定期配信中BADモード” 
+勝負はまた逆転
+キミの思い通りなんです`,
+            call: ``
+          },
+           {
+            lyrics: `肯定も否定も 届かない運命
+だって 神さまが決めたの
+(嘘！赤い糸なくたって信じんの)
+やっぱやっぱ やばやば 
+せーのっで乱れ撃ち (ばん♡ばん♡)`,
+            call: `👏👏うーたちゃん！x4`
+          },
+           {
+            lyrics: `しゅきって ばぶ？ ハート迷宮
+メンブレして だるっ きるみー（ばん♡ばん♡）
+どきってバグ ま！夢中意中
+即逮捕ですっ 
+(うぉんてっど♡ うぉんてっど♡)`,
+            call: ``
+          },
+           {
+            lyrics: `恋ってさ Beauty or Dirty 
+            どっちでも美学だね
+こんな広い世界 捜せちゃうくらい
+全部を愛してる
+Are You Ready? 
+らぶきゅん♡うぉんてっど`,
+            call: ``
+          },
+           {
+            lyrics: ``,
+            call: `ウィスペケスィ　チャペチャペチャペ
+チャペアペカラキナカラアペチャペ
+除去　飛　除去　虎　虎　虎
+虎火人造繊維海女振動化繊(倍速）`
+          },
+           {
+            lyrics: `一途は正義でしょ
+            YES かね YES 答えて
+鳴り響くサイレン
+ときめき暴走中！`,
+            call: ``
+          },
+           {
+            lyrics: `しゅきちゅ ばっきゅん！ ハート命中
+らぶ過ぎて 罪詰みみ（ばん♡ばん♡）
+どきっ 超魔球 わ！ご臨終
+即逮捕ですっ
+(うぉんてっど♡ うぉんてっど♡)`,
+            call: ``
+          },
+           {
+            lyrics: `どうしよっか Merry or Killing 
+            どっちとも永遠だね
+わがままだって 泣き虫だって
+全部を愛してね
+Are You Ready? 
+らぶきゅん♡うぉんてっど`,
+            call: ``
+          },
+           {
+            lyrics: ``,
+            call: `わお！うっおい！×4 
+            👏👏👏👏👏しゃー行くぞ！
+             桃！栗！芋！乳！妹！油！段ボール！鬼！悪魔！ディアステージ！`
+          },
+        ],
+
+        videoNote: "参考動画のYouTube IDを設定してください。"
+      },
+      ];
+
+
+    /* ========================================
+       YouTube ID抽出関数
+    ======================================== */
+
+    function extractYouTubeId(urlOrId) {
+      if (!urlOrId) return "";
+      const match = urlOrId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      return match ? match[1] : urlOrId.trim();
+    }
+
+
+    /* ========================================
+       HTML安全表示
+    ======================================== */
+
+    function escapeHTML(text) {
+
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+    /* ========================================
+       曲一覧表示
+    ======================================== */
+
+    function renderSongs(list = songs) {
+
+      const songList =
+        document.getElementById("song-list");
+
+      songList.innerHTML = "";
+
+      if (list.length === 0) {
+
+        songList.innerHTML = `
+          <div class="empty">
+            該当する曲が見つかりませんでした。
+          </div>
+        `;
+
+        return;
+      }
+
+
+      list.forEach(song => {
+
+        const card =
+          document.createElement("article");
+
+        card.className = "song-card";
+
+
+        card.innerHTML = `
+
+          <h3>
+            ${escapeHTML(song.title)}
+          </h3>
+
+          <div class="song-image">
+
+            <img
+              src="${escapeHTML(song.image)}"
+              alt="${escapeHTML(song.title)}"
+            >
+
+          </div>
+
+          <button class="detail-button">
+            歌詞・コールを見る
+          </button>
+
+        `;
+
+
+        card
+          .querySelector(".detail-button")
+          .addEventListener(
+            "click",
+            () => showSong(song.id)
+          );
+
+
+        songList.appendChild(card);
+
+      });
+
+    }
+
+
+    /* ========================================
+       曲検索
+    ======================================== */
+
+    function searchSongs() {
+
+      const keyword =
+        document
+          .getElementById("search")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const filtered =
+        songs.filter(song =>
+          song.title
+            .toLowerCase()
+            .includes(keyword)
+        );
+
+
+      renderSongs(filtered);
+
+    }
+
+
+    /* ========================================
+       ホーム表示
+    ======================================== */
+
+    function showHome() {
+
+      document
+        .getElementById("home-page")
+        .classList
+        .remove("hidden");
+
+
+      document
+        .getElementById("detail-page")
+        .classList
+        .add("hidden");
+
+
+      window.scrollTo(0, 0);
+
+    }
+
+
+    /* ========================================
+       曲詳細表示（lyricsCalls対応）
+    ======================================== */
+
+    function showSong(id) {
+      const song = songs.find(item => item.id === id);
+      if (!song) return;
+
+      document.getElementById("home-page").classList.add("hidden");
+      document.getElementById("detail-page").classList.remove("hidden");
+
+      /* YouTube */
+      let videoHTML = "";
+      const videoId = extractYouTubeId(song.youtubeId);
+
+      if (videoId) {
+        // startTimeが設定されていれば ?start=秒数 を追加
+        const startParam = song.startTime ? `?start=${song.startTime}` : "";
+        const videoSrc = `https://www.youtube.com/embed/${videoId}${startParam}`;
+
+        videoHTML = `
+          <div class="video-wrapper">
+            <iframe src="${videoSrc}" loading="lazy" allowfullscreen></iframe>
+          </div>
+        `;
+      } else {
+        videoHTML = `<div class="notice">まだ参考動画が設定されていません。</div>`;
+      }
+
+      /* 歌詞・コールの行ごと出力 */
+      let rowsHTML = "";
+      if (song.lyricsCalls && song.lyricsCalls.length > 0) {
+        rowsHTML = song.lyricsCalls.map(block => `
+          <div class="table-row">
+            <div class="lyrics-td">${escapeHTML(cleanText(block.lyrics))}</div>
+            <div class="call-td">${escapeHTML(cleanText(block.call))}</div>
+          </div>
+        `).join("");
+      } else {
+        rowsHTML = `
+          <div class="table-row">
+            <div class="lyrics-td">${escapeHTML(cleanText(song.lyrics))}</div>
+            <div class="call-td">${escapeHTML(cleanText(song.calls))}</div>
+          </div>
+        `;
+      }
+
+      /* 描画 */
+      document.getElementById("song-detail").innerHTML = `
+        <div class="detail-heading">
+          <h2>${escapeHTML(song.title)}</h2>
+        </div>
+
+        <div class="section">
+          <div class="lyrics-call-table">
+            <div class="table-header">
+              <div class="lyrics-th">歌詞</div>
+              <div class="call-th">📣 コール・掛け声</div>
+            </div>
+            ${rowsHTML}
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>▶ 参考動画</h3>
+          ${videoHTML}
+        </div>
+      `;
+
+      window.scrollTo(0, 0);
+    }
+
+    /* ========================================
+   余計な改行・スペース除去関数
+======================================== */
+function cleanText(text) {
+  if (!text) return "";
+  return text
+    .split("\n")
+    .map(line => line.trim()) // 各行の前後の空白・タブを削除
+    .join("\n")
+    .trim(); // 全体の先頭・末尾の無駄な改行を削除
+}
+
+
+    /* ========================================
+       初期表示
+    ======================================== */
+
+    renderSongs();
+
+  </script>
+
 </body>
 </html>
