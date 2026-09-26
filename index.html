@@ -585,7 +585,7 @@
   <header class="site-header">
 
     <h1 class="logo">
-      きゅるしてコールまとめ♡253
+      きゅるしてコールまとめ♡422
     </h1>
 
     <div class="subtitle">
@@ -1217,7 +1217,7 @@ Please help me…！
 世界中に指名手配してやるー！！！`,
             call: `わお！うっおい！×4 
             👏👏👏👏👏しゃー行くぞ！
-タイガー！ファイヤー！サイバー！ファイバー！ダイバー！バイバー！！ジャージャー！`
+タイガー！ファイヤー！サイバー！ファイバー！ダイバー！バイバー！ジャージャー！`
           },
            {
             lyrics: `かわいいこなら誰でもいいの？
@@ -1262,8 +1262,8 @@ Are You Ready？
            {
             lyrics: ``,
             call: `わお！うっおい！×4 
-            👏👏👏👏👏しゃー行くぞ！
-            虎！火！人造！繊維！海女！振動！化繊！`
+👏👏👏👏👏しゃー行くぞ！
+虎！火！人造！繊維！海女！振動！化繊！`
           },
            {
             lyrics: `賛成！沼る刑にしてやる
@@ -1347,6 +1347,90 @@ Are You Ready?
 
         videoNote: "参考動画のYouTube IDを設定してください。"
       },
+    ];
+
+
+    function renderSongs(list) {
+      const songList = document.getElementById("song-list");
+      if (list.length === 0) {
+        songList.innerHTML = `<div class="empty">該当する曲が見つかりません</div>`;
+        return;
+      }
+      songList.innerHTML = list.map(song => `
+        <div class="song-card">
+          <h3>${song.title}</h3>
+          <div class="song-image">
+            <img src="${song.image}" alt="${song.title}" onerror="this.style.display='none'">
+          </div>
+          <button class="detail-button" onclick="showDetail(${song.id})">曲を見る</button>
+        </div>
+      `).join("");
+    }
+
+    function searchSongs() {
+      const query = document.getElementById("search").value.toLowerCase();
+      const filtered = songs.filter(song => song.title.toLowerCase().includes(query));
+      renderSongs(filtered);
+    }
+
+    function showHome() {
+      document.getElementById("home-page").classList.remove("hidden");
+      document.getElementById("detail-page").classList.add("hidden");
+      renderSongs(songs);
+    }
+
+    function getYoutubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : url;
+    }
+
+    function showDetail(id) {
+      const song = songs.find(s => s.id === id);
+      if (!song) return;
+
+      const ytId = getYoutubeId(song.youtubeId);
+      const embedUrl = `https://www.youtube.com/embed/${ytId}?start=${song.startTime || 0}`;
+
+      const rows = song.lyricsCalls.map(item => `
+        <div class="table-row">
+          <div class="lyrics-td">${item.lyrics}</div>
+          <div class="call-td">${item.call}</div>
+        </div>
+      `).join("");
+
+      document.getElementById("song-detail").innerHTML = `
+        <div class="detail-heading">
+          <h2>${song.title}</h2>
+        </div>
+        <div class="section">
+          <h3>歌詞・コール</h3>
+          <div class="lyrics-call-table">
+            <div class="table-header">
+              <div class="lyrics-th">歌詞</div>
+              <div class="call-th">コール</div>
+            </div>
+            ${rows}
+          </div>
+        </div>
+        <div class="section">
+          <h3>参考動画</h3>
+          <div class="video-wrapper">
+            <iframe src="${embedUrl}" allowfullscreen></iframe>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("home-page").classList.add("hidden");
+      document.getElementById("detail-page").classList.remove("hidden");
+      window.scrollTo(0, 0);
+    }
+
+    // 初期表示
+    showHome();
+  </script>
+</body>
+</html>
 
 
     /* ========================================
