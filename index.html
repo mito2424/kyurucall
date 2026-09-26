@@ -586,7 +586,7 @@
   <header class="site-header">
 
     <h1 class="logo">
-      きゅるしてコールまとめ♡332
+      きゅるしてコールまとめ♡349
     </h1>
 
     <div class="subtitle">
@@ -1532,8 +1532,10 @@ Are You Ready? 
       if (song.lyricsCalls && song.lyricsCalls.length > 0) {
         rowsHTML = song.lyricsCalls.map(block => `
           <div class="table-row">
-            <div class="lyrics-td">${escapeHTML(cleanText(block.lyrics))}</div>
-            <div class="call-td">${escapeHTML(cleanText(block.call))}</div>
+            /* JavaScript内に cleanText 関数の定義を追加します */
+function cleanText(text) {
+  return text ? text.trim() : "";
+}
           </div>
         `).join("");
       } else {
@@ -1561,11 +1563,24 @@ Are You Ready? 
           </div>
         </div>
 
-        <div class="section">
-          <h3>▶ 参考動画</h3>
-          ${videoHTML}
-        </div>
-      `;
+       <div class="section">
+          <h3>▶ 参考動画</h3>
+          ${videoHTML}
+        </div>
+      `;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+  renderSongs();
+});
+
+    /* 画面読み込み時の初期表示 */
+    document.addEventListener("DOMContentLoaded", () => {
+      renderSongs();
+    });
+  </script>
+</body>
+</html>
 
       window.scrollTo(0, 0);
     }
