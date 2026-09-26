@@ -585,7 +585,7 @@
   <header class="site-header">
 
     <h1 class="logo">
-      きゅるしてコールまとめ♡422
+      きゅるしてコールまとめ♡429
     </h1>
 
     <div class="subtitle">
@@ -1433,184 +1433,74 @@ Are You Ready?
 </html>
 
 
-    /* ========================================
-       YouTube ID抽出関数
-    ======================================== */
-
+    <script>
+    /* ========================================== YouTube ID抽出関数 ========================================== */
     function extractYouTubeId(urlOrId) {
       if (!urlOrId) return "";
       const match = urlOrId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
       return match ? match[1] : urlOrId.trim();
     }
 
-
-    /* ========================================
-       HTML安全表示
-    ======================================== */
-
+    /* ========================================== HTML安全表示 ========================================== */
     function escapeHTML(text) {
-
       return String(text)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
-
     }
 
-
-    /* ========================================
-       曲一覧表示
-    ======================================== */
-
+    /* ========================================== 曲一覧表示 ========================================== */
     function renderSongs(list = songs) {
-
-      const songList =
-        document.getElementById("song-list");
-
+      const songList = document.getElementById("song-list");
       songList.innerHTML = "";
-
       if (list.length === 0) {
-
-        songList.innerHTML = `
-          <div class="empty">
-            該当する曲が見つかりませんでした。
-          </div>
-        `;
-
+        songList.innerHTML = `<div class="empty">該当する曲が見つかりませんでした。</div>`;
         return;
       }
-
-
       list.forEach(song => {
-
-        const card =
-          document.createElement("article");
-
+        const card = document.createElement("article");
         card.className = "song-card";
-
-
+        card.onclick = () => showDetail(song.id);
         card.innerHTML = `
-
-          <h3>
-            ${escapeHTML(song.title)}
-          </h3>
-
+          <h3>${escapeHTML(song.title)}</h3>
           <div class="song-image">
-
-            <img
-              src="${escapeHTML(song.image)}"
-              alt="${escapeHTML(song.title)}"
-            >
-
+            <img src="${escapeHTML(song.image)}" alt="${escapeHTML(song.title)}" onerror="this.style.display='none'">
           </div>
-
-          <button class="detail-button">
-            歌詞・コールを見る
-          </button>
-
+          <button class="detail-button">曲を見る</button>
         `;
-
-
-        card
-          .querySelector(".detail-button")
-          .addEventListener(
-            "click",
-            () => showSong(song.id)
-          );
-
-
         songList.appendChild(card);
-
       });
-
     }
 
-
-    /* ========================================
-       曲検索
-    ======================================== */
-
+    /* ========================================== 検索機能 ========================================== */
     function searchSongs() {
-
-      const keyword =
-        document
-          .getElementById("search")
-          .value
-          .trim()
-          .toLowerCase();
-
-
-      const filtered =
-        songs.filter(song =>
-          song.title
-            .toLowerCase()
-            .includes(keyword)
-        );
-
-
+      const query = document.getElementById("search").value.toLowerCase().trim();
+      const filtered = songs.filter(song => song.title.toLowerCase().includes(query));
       renderSongs(filtered);
-
     }
 
-
-    /* ========================================
-       ホーム表示
-    ======================================== */
-
+    /* ========================================== ホーム画面表示 ========================================== */
     function showHome() {
-
-      document
-        .getElementById("home-page")
-        .classList
-        .remove("hidden");
-
-
-      document
-        .getElementById("detail-page")
-        .classList
-        .add("hidden");
-
-
-      window.scrollTo(0, 0);
-
+      document.getElementById("home-page").classList.remove("hidden");
+      document.getElementById("detail-page").classList.add("hidden");
+      renderSongs(songs);
     }
 
-
-    /* ========================================
-       曲詳細表示（lyricsCalls対応）
-    ======================================== */
-
-    function showSong(id) {
-      const song = songs.find(item => item.id === id);
+    /* ========================================== 詳細画面表示 ========================================== */
+    function showDetail(id) {
+      const song = songs.find(s => s.id === id);
       if (!song) return;
 
-      document.getElementById("home-page").classList.add("hidden");
-      document.getElementById("detail-page").classList.remove("hidden");
+      const ytId = extractYouTubeId(song.youtubeId);
+      const videoHTML = ytId 
+        ? `<iframe src="https://www.youtube.com/embed/${ytId}?start=${song.startTime || 0}" allowfullscreen></iframe>`
+        : `<p>まだ参考動画が設定されていません。</p>`;
 
-      /* YouTube */
-      let videoHTML = "";
-      const videoId = extractYouTubeId(song.youtubeId);
-
-      if (videoId) {
-        // startTimeが設定されていれば ?start=秒数 を追加
-        const startParam = song.startTime ? `?start=${song.startTime}` : "";
-        const videoSrc = `https://www.youtube.com/embed/${videoId}${startParam}`;
-
-        videoHTML = `
-          <div class="video-wrapper">
-            <iframe src="${videoSrc}" loading="lazy" allowfullscreen></iframe>
-          </div>
-        `;
-      } else {
-        videoHTML = `<div class="notice">まだ参考動画が設定されていません。</div>`;
-      }
-
-      /* 歌詞・コールの行ごと出力 */
       let rowsHTML = "";
-      if (song.lyricsCalls && song.lyricsCalls.length > 0) {
-        rowsHTML = song.lyricsCalls.map(block => `
+      if (song.songLyricsCalls && song.songLyricsCalls.length > 0) {
+        rowsHTML = song.songLyricsCalls.map(block => `
           <div class="table-row">
             <div class="lyrics-td">${escapeHTML(block.lyrics || "")}</div>
             <div class="call-td">${escapeHTML(block.call || "")}</div>
@@ -1625,39 +1515,36 @@ Are You Ready?
         `;
       }
 
-      /* 描画 */
       document.getElementById("song-detail").innerHTML = `
         <div class="detail-heading">
           <h2>${escapeHTML(song.title)}</h2>
         </div>
-
         <div class="section">
+          <h3>歌詞・コール</h3>
           <div class="lyrics-call-table">
             <div class="table-header">
               <div class="lyrics-th">歌詞</div>
-              <div class="call-th">📣 コール・掛け声</div>
+              <div class="call-th">コール・掛け声</div>
             </div>
             ${rowsHTML}
           </div>
         </div>
-
         <div class="section">
-          <h3>▶ 参考動画</h3>
-          ${videoHTML}
+          <h3>参考動画</h3>
+          <div class="video-wrapper">
+            ${videoHTML}
+          </div>
         </div>
       `;
 
+      document.getElementById("home-page").classList.add("hidden");
+      document.getElementById("detail-page").classList.remove("hidden");
       window.scrollTo(0, 0);
     }
 
-
-    /* ========================================
-       初期表示
-    ======================================== */
-
+    /* ========================================== 初期表示 ========================================== */
     renderSongs();
-
   </script>
-
 </body>
+</html>
 </html>
