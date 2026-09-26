@@ -251,7 +251,7 @@
 
       aspect-ratio: 16 / 9;
 
-      margin: 0 0 10px;
+      margin: 0 0 0px;
 
       border-radius: 14px;
 
@@ -593,7 +593,7 @@
   <header class="site-header">
 
     <h1 class="logo">
-      きゅるしてコールまとめ♡739
+      きゅるしてコールまとめ♡745
     </h1>
 
     <div class="subtitle">
@@ -2555,6 +2555,7 @@ Marry me Marry me Marry Marry My Darling
         card.onclick = () => showDetail(song.id);
         card.innerHTML = `
           <h3>${escapeHTML(song.title)}</h3>
+          <div class="song-update">${escapeHTML(song.updateDate || "3/31更新")}</div>
           <div class="song-image">
             <img src="${escapeHTML(song.image)}" alt="${escapeHTML(song.title)}" onerror="this.style.display='none'">
           </div>
