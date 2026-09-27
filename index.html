@@ -589,6 +589,32 @@
 
     }
 
+    /* ページトップへ戻るボタンのスタイル */
+    .back-to-top {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 45px;
+      height: 45px;
+      background: #d8669c;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(180, 90, 140, 0.3);
+      z-index: 999;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .back-to-top:hover {
+      background: #bd4b83;
+      transform: translateY(-2px);
+    }
+
   </style>
 </head>
 
@@ -2639,6 +2665,10 @@ Marry me Marry me Marry Marry My Darling
     /* ========================================== 初期表示 ========================================== */
     renderSongs();
   </script>
+
+
+  <!-- ページトップへ戻るボタン -->
+  <a href="#" class="back-to-top">▲</a>
 </body>
 </html>
 </html>
