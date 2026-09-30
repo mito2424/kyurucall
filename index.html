@@ -63,8 +63,8 @@
         ),
         url("images/header-bg.jpg");
 
-      background-size: 100% auto;
-      background-position: center top;
+      background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
 
       padding: 45px 20px 50px;
@@ -73,6 +73,30 @@
 
       border-bottom: 1px solid #efc4da;
     }
+
+
+    /* ================================
+        スマホ
+    ================================ */
+
+    @media (max-width: 650px) {
+
+      .site-header {
+        background-image:
+          linear-gradient(
+            rgba(255, 220, 235, 0.25),
+            rgba(245, 220, 255, 0.25)
+          ),
+          url("images/header-bg-sp.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 30px 15px 35px;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
 
 
     .logo {
