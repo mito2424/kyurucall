@@ -74,6 +74,23 @@
       border-bottom: 1px solid #efc4da;
     }
 
+    /* ================================
+        スマホ用メディアクエリ（スマホ表示時のみ適用）
+    ================================ */
+    @media (max-width: 650px) {
+      .site-header {
+        background-image:
+          linear-gradient(
+            rgba(255, 220, 235, 0.25),
+            rgba(245, 220, 255, 0.25)
+          ),
+          url("images/header-bg-sp.jpg");
+        background-size: 100% auto;
+        background-position: center top;
+        background-repeat: no-repeat;
+      }
+    }
+
 
     /* ================================
         スマホ
