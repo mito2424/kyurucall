@@ -622,11 +622,10 @@
 
     }
 
-    /* ページトップへ戻るボタンのスタイル */
-    .back-to-top {
+    /* ページトップ・ボトムへ移動するボタンの共通スタイル */
+    .page-scroll-btn {
       position: fixed;
       right: 20px;
-      bottom: 20px;
       width: 45px;
       height: 45px;
       background: #d8669c;
@@ -643,9 +642,19 @@
       transition: background 0.2s, transform 0.2s;
     }
 
-    .back-to-top:hover {
+    .page-scroll-btn:hover {
       background: #bd4b83;
       transform: translateY(-2px);
+    }
+
+    /* ページトップへ戻るボタン（位置を少し上に） */
+    .back-to-top {
+      bottom: 75px;
+    }
+
+    /* ページボトムへ行くボタン */
+    .back-to-bottom {
+      bottom: 20px;
     }
 
   </style>
@@ -3544,8 +3553,9 @@ Sweet (Silly) ShowTime (Shut up)
   </script>
 
 
-  <!-- ページトップへ戻るボタン -->
-  <a href="#" class="back-to-top">▲</a>
+  <!-- ページ移動ボタン（上へ・下へ） -->
+  <a href="#" class="page-scroll-btn back-to-top" title="一番上へ">▲</a>
+  <a href="#footer" class="page-scroll-btn back-to-bottom" title="一番下へ">▼</a>
 </body>
 </html>
 </html>
