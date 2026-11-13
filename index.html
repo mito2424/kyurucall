@@ -420,6 +420,16 @@
       padding-bottom: 10px;
     }
 
+    /* 歌詞のみ（80:20） */
+    .table-row.lyrics-only {
+      grid-template-columns: 4fr 1fr;
+    }
+
+    /* コールのみ（20:80） */
+    .table-row.call-only {
+      grid-template-columns: 1fr 4fr;
+    }
+
     .lyrics-td, .call-td {
       white-space: pre-wrap;
       overflow-wrap: anywhere;
@@ -3226,12 +3236,24 @@ Sweet (Silly) ShowTime (Shut up)
 
       let rowsHTML = "";
       if (song.lyricsCalls && song.lyricsCalls.length > 0) {
-        rowsHTML = song.lyricsCalls.map(block => `
-          <div class="table-row">
-            <div class="lyrics-td">${escapeHTML(block.lyrics || "")}</div>
-            <div class="call-td">${escapeHTML(block.call || "")}</div>
-          </div>
-        `).join("");
+        rowsHTML = song.lyricsCalls.map(block => {
+          const hasLyrics = (block.lyrics || "").trim() !== "";
+          const hasCall = (block.call || "").trim() !== "";
+          let rowClass = "table-row";
+
+          if (hasLyrics && !hasCall) {
+            rowClass += " lyrics-only";
+          } else if (!hasLyrics && hasCall) {
+            rowClass += " call-only";
+          }
+
+          return `
+            <div class="${rowClass}">
+              <div class="lyrics-td">${escapeHTML(block.lyrics || "")}</div>
+              <div class="call-td">${escapeHTML(block.call || "")}</div>
+            </div>
+          `;
+        }).join("");
       }
 
       document.getElementById("song-detail").innerHTML = `
