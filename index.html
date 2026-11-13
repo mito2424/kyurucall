@@ -3554,8 +3554,8 @@ Sweet (Silly) ShowTime (Shut up)
 
 
   <!-- ページ移動ボタン（上へ・下へ） -->
-  <a href="#" class="page-scroll-btn back-to-top" title="一番上へ">▲</a>
-  <a href="#footer" class="page-scroll-btn back-to-bottom" title="一番下へ">▼</a>
+  <a href="javascript:void(0)" class="page-scroll-btn back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" title="一番上へ">▲</a>
+  <a href="javascript:void(0)" class="page-scroll-btn back-to-bottom" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});" title="一番下へ">▼</a>
 </body>
 </html>
 </html>
