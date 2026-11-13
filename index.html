@@ -3308,13 +3308,46 @@ Sweet (Silly) ShowTime (Shut up)
     ];
 
 
+    /* ========================================== 日付とタイトルの並び替え関数 ========================================== */
+    function sortSongs(list) {
+      return [...list].sort((a, b) => {
+        // "26/10/17更新" のような文字列から数字部分を抽出して日付オブジェクトを作成
+        const getDateValue = (str) => {
+          if (!str) return 0;
+          const match = str.match(/(\d+)\/(\d+)\/(\d+)/);
+          if (!match) return 0;
+          // 2000年代を想定して YYYY, MM, DD に変換
+          const year = 2000 + parseInt(match[1], 10);
+          const month = parseInt(match[2], 10);
+          const day = parseInt(match[3], 10);
+          return new Date(year, month - 1, day).getTime();
+        };
+
+        const dateA = getDateValue(a.updateDate);
+        const dateB = getDateValue(b.updateDate);
+
+        // 1. 日付の比較（新しい日付を上にしたい場合は b - a、古い順にしたい場合は a - b）
+        if (dateB !== dateA) {
+          return dateB - dateA; // 新しい更新日が上に来る設定
+        }
+
+        // 2. 日付が同じ場合はタイトルの50音順（日本語の読み順）で比較
+        return a.title.localeCompare(b.title, 'ja');
+      });
+    }
+
+    /* ========================================== 曲一覧表示 ========================================== */
     function renderSongs(list) {
       const songList = document.getElementById("song-list");
-      if (list.length === 0) {
+      
+      // 渡されたリストを日付順・50音順にソートする
+      const sortedList = sortSongs(list);
+
+      if (sortedList.length === 0) {
         songList.innerHTML = `<div class="empty">該当する曲が見つかりません</div>`;
         return;
       }
-      songList.innerHTML = list.map(song => `
+      songList.innerHTML = sortedList.map(song => `
         <div class="song-card">
           <h3>${song.title}</h3>
           <div class="song-update">${song.updateDate || "3/31更新"}</div>
