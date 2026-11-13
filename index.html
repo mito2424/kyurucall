@@ -71,7 +71,12 @@
       background-position: center;
       background-repeat: no-repeat;
 
-      padding: 45px 20px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px; /* 背景画像を見せるための最小の高さ（必要に応じて調整可） */
+      padding: 40px 20px;
 
       text-align: center;
 
@@ -686,14 +691,6 @@
       流動的なコールの最新情報をお届け！
 
     </p>
-
-    <nav class="nav">
-
-      <button onclick="showHome()">
-        🏠 ホーム
-      </button>
-
-    </nav>
 
   </header>
 
