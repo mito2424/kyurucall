@@ -3444,17 +3444,37 @@ Sweet (Silly) ShowTime (Shut up)
       renderSongs(filtered);
     }
 
+    /* ========================================== ブラウザバック（履歴）の監視 ========================================== */
+    window.addEventListener('popstate', (event) => {
+      const state = event.state;
+      if (state && state.page === 'detail') {
+        // 履歴が「曲詳細」の場合、履歴を再追加せずに詳細を表示
+        showDetail(state.id, false);
+      } else {
+        // 履歴が「ホーム」の場合、ホームを表示
+        showHome(false);
+      }
+    });
+
     /* ========================================== ホーム画面表示 ========================================== */
-    function showHome() {
+    function showHome(pushHistory = true) {
+      if (pushHistory) {
+        history.pushState({ page: 'home' }, "", window.location.pathname);
+      }
       document.getElementById("home-page").classList.remove("hidden");
       document.getElementById("detail-page").classList.add("hidden");
       renderSongs(songs);
+      window.scrollTo(0, 0);
     }
 
     /* ========================================== 詳細画面表示 ========================================== */
-    function showDetail(id) {
+    function showDetail(id, pushHistory = true) {
       const song = songs.find(s => s.id === id);
       if (!song) return;
+
+      if (pushHistory) {
+        history.pushState({ page: 'detail', id: id }, "", "#song-" + id);
+      }
 
       const ytId = extractYouTubeId(song.youtubeId);
       const videoHTML = ytId 
