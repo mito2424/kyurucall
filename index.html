@@ -3435,30 +3435,29 @@ Sweet (Silly) ShowTime (Shut up)
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
     }
-
-    /* ========================================== 曲一覧表示 ========================================== */
-    function renderSongs(list = songs) {
+/* ========================================== 曲一覧表示 ========================================== */
+    function renderSongs(list) {
       const songList = document.getElementById("song-list");
-      songList.innerHTML = "";
-      if (list.length === 0) {
-        songList.innerHTML = `<div class="empty">該当する曲が見つかりませんでした。</div>`;
+      
+      // 渡されたリストを日付順・50音順にソートする
+      const sortedList = sortSongs(list);
+
+      if (sortedList.length === 0) {
+        songList.innerHTML = `<div class="empty">該当する曲が見つかりません</div>`;
         return;
       }
-      list.forEach(song => {
-        const card = document.createElement("article");
-        card.className = "song-card";
-        card.onclick = () => showDetail(song.id);
-        card.innerHTML = `
+      songList.innerHTML = sortedList.map(song => `
+        <div class="song-card" onclick="showDetail(${song.id})">
           <h3>${escapeHTML(song.title)}</h3>
           <div class="song-update">${escapeHTML(song.updateDate || "3/31更新")}</div>
           <div class="song-image">
             <img src="${escapeHTML(song.image)}" alt="${escapeHTML(song.title)}" onerror="this.style.display='none'">
           </div>
           <button class="detail-button">🎤曲を見る📣</button>
-        `;
-        songList.appendChild(card);
-      });
+        </div>
+      `).join("");
     }
+    
 
     /* ========================================== 検索機能 ========================================== */
     function searchSongs() {
